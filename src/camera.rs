@@ -14,4 +14,3 @@ fn spawn_camera(
 ) {
     commands.spawn(Camera2d);
 }
-
