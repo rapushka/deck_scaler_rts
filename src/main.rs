@@ -4,6 +4,7 @@ use crate::third_party::ThirdPartyPlugin;
 use crate::gameplay::GameplayPlugin;
 use crate::camera::CameraPlugin;
 use crate::infrastructure::InfrastructurePlugin;
+use crate::view::ViewPlugin;
 
 mod gameplay;
 mod prelude;
@@ -11,6 +12,7 @@ mod third_party;
 mod camera;
 mod assets;
 mod infrastructure;
+mod view;
 
 fn main() {
     App::new()
@@ -19,6 +21,7 @@ fn main() {
         .add_plugins(InfrastructurePlugin)
         .add_plugins(AssetsPlugin)
         .add_plugins(GameplayPlugin)
+        .add_plugins(ViewPlugin)
         .add_plugins(CameraPlugin)
 
         .run();

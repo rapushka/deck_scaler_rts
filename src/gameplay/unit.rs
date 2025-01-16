@@ -1,5 +1,6 @@
 use crate::assets::UnitAssets;
 use crate::prelude::*;
+use crate::view::RequireSprite;
 
 pub struct UnitPlugin;
 
@@ -16,9 +17,6 @@ fn test_spawn_unit(
     assets: Res<UnitAssets>,
 ) {
     commands.spawn(Name::from("crook"))
-        .insert(Sprite {
-            image: assets.crook.clone(),
-            ..default()
-        })
+        .insert(RequireSprite(assets.crook.clone()))
     ;
 }
