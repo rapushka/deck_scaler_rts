@@ -5,5 +5,5 @@ pub enum UnitID {
     Crook,
 }
 
-#[derive(Component)]
+#[derive(Event)]
 pub struct SpawnUnit(pub UnitID);
