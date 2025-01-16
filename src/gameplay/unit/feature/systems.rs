@@ -1,3 +1,4 @@
+use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
 use crate::prelude::*;
 
@@ -17,6 +18,8 @@ pub fn spawn_unit(
         commands.spawn(Name::from(f!("{unit_id:?}")))
             .insert(unit_id)
             .insert(LoadingView)
+            .insert(BaseStats(Stats::new(10.0)))
+            .insert(StatsModifiers(Stats::empty()))
         ;
     }
 }
