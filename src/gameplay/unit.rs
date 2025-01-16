@@ -1,22 +1,17 @@
-use crate::assets::UnitAssets;
 use crate::prelude::*;
-use crate::view::RequireSprite;
+
+pub use feature::*;
+
+mod feature;
 
 pub struct UnitPlugin;
 
 impl Plugin for UnitPlugin {
     fn build(&self, app: &mut App) {
         app
-            .add_systems(OnEnter(AppState::Gameplay), test_spawn_unit)
+            .add_systems(OnEnter(AppState::Gameplay), test_require_spawn_unit)
+
+            .add_systems(Update, spawn_unit.run_if(in_state(AppState::Gameplay)))
         ;
     }
-}
-
-fn test_spawn_unit(
-    mut commands: Commands,
-    assets: Res<UnitAssets>,
-) {
-    commands.spawn(Name::from("crook"))
-        .insert(RequireSprite(assets.crook.clone()))
-    ;
 }

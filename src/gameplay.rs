@@ -1,7 +1,8 @@
-use crate::gameplay::unit::UnitPlugin;
+use crate::gameplay::unit::
+UnitPlugin;
 use crate::prelude::*;
 
-mod unit;
+pub mod unit;
 
 pub struct GameplayPlugin;
 
