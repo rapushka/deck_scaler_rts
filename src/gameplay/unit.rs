@@ -20,7 +20,7 @@ impl Plugin for UnitPlugin {
             .add_event::<SpawnUnit>()
 
             .add_systems(OnEnter(AppState::Gameplay), test_require_spawn_unit)
-            .add_systems(Update, spawn_unit.run_if(in_state(AppState::Gameplay)))
+            .add_systems(Update, spawn_unit.run_if(in_state(AppState::Gameplay)).in_set(Order::GameLogic))
         ;
     }
 }

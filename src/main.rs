@@ -3,6 +3,7 @@ use crate::prelude::*;
 use crate::third_party::ThirdPartyPlugin;
 use crate::gameplay::GameplayPlugin;
 use crate::camera::CameraPlugin;
+use crate::common::CommonPlugin;
 use crate::infrastructure::InfrastructurePlugin;
 
 mod gameplay;
@@ -11,6 +12,7 @@ mod third_party;
 mod camera;
 mod assets;
 mod infrastructure;
+mod common;
 
 fn main() {
     App::new()
@@ -19,6 +21,7 @@ fn main() {
         .add_plugins(InfrastructurePlugin)
         .add_plugins(AssetsPlugin)
         .add_plugins(GameplayPlugin)
+        .add_plugins(CommonPlugin)
         .add_plugins(CameraPlugin)
 
         .run();

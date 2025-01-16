@@ -13,7 +13,7 @@ impl Plugin for StatsPlugin {
         app
             .add_systems(Update, (
                 update_movement_speed,
-            ))
+            ).in_set(Order::Preprocess))
         ;
     }
 }
