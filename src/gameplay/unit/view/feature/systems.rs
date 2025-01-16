@@ -1,7 +1,6 @@
 use crate::assets::UnitAssets;
 use crate::gameplay::unit::view::LoadingView;
-use crate::prelude::{Commands, Res, UnitID};
-use crate::view::RequireSprite;
+use crate::prelude::*;
 use bevy::prelude::{Entity, Query, With};
 
 pub fn load_unit_view(
@@ -15,7 +14,7 @@ pub fn load_unit_view(
         };
 
         commands.entity(unit)
-            .insert(RequireSprite(sprite))
+            .insert(Sprite::from_image(sprite))
             .remove::<LoadingView>()
         ;
     }
