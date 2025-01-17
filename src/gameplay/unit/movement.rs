@@ -11,7 +11,12 @@ impl Plugin for UnitMovementPlugin {
         app
             .register_type::<TargetPosition>()
 
-            .add_systems(Update, move_unit_to_target.in_set(Order::GameLogic))
+            .add_systems(Update, (
+                move_unit_to_target,
+                remove_target_position_if_too_close,
+            )
+                .chain()
+                .in_set(Order::GameLogic))
         ;
     }
 }
