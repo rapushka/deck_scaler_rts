@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-#[derive(Copy, Clone)]
+#[derive(Reflect, Copy, Clone)]
 pub struct Modifier {
     multiplier: f32,
     additive: f32,

@@ -1,10 +1,12 @@
 use crate::gameplay::unit::stats::{Modifier, Stat, Stats};
 use crate::prelude::*;
 
-#[derive(Component)]
+#[derive(Component, Reflect)]
+#[reflect(Component)]
 pub struct BaseStats(pub Stats<f32>);
 
-#[derive(Component)]
+#[derive(Component, Reflect)]
+#[reflect(Component)]
 pub struct StatsModifiers(pub Stats<Modifier>);
 
 #[derive(Component)]

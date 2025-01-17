@@ -2,14 +2,16 @@ use bevy::utils::HashMap;
 use std::default::Default;
 
 pub use modifier::*;
+use crate::prelude::{Component, Reflect};
 
 mod modifier;
 
-#[derive(Debug, Clone, Eq, PartialEq, Hash)]
+#[derive(Reflect, Debug, Clone, Eq, PartialEq, Hash)]
 pub enum Stat {
     MovementSpeed,
 }
 
+#[derive(Reflect)]
 pub struct Stats<T>(pub HashMap<Stat, T>);
 
 impl<T: Default> Stats<T> {
