@@ -1,4 +1,4 @@
-use crate::common::movement::feature::handle_movement;
+use crate::common::movement::feature::*;
 use crate::prelude::*;
 
 pub use feature::*;
@@ -10,7 +10,9 @@ pub struct MovementPlugin;
 impl Plugin for MovementPlugin {
     fn build(&self, app: &mut App) {
         app
-            .add_systems(Update, handle_movement.in_set(Order::Postprocess))
+            .register_type::<TargetPosition>()
+
+            .add_systems(Update, move_to_target.in_set(Order::Postprocess))
         ;
     }
 }

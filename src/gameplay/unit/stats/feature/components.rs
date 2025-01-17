@@ -9,9 +9,6 @@ pub struct BaseStats(pub Stats<f32>);
 #[reflect(Component)]
 pub struct StatsModifiers(pub Stats<Modifier>);
 
-#[derive(Component)]
-pub struct MovementSpeed(pub f32);
-
 impl BaseStats {
     pub fn get(&self, stat: &Stat) -> f32 {
         *self.0.0.get(stat)

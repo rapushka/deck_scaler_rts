@@ -1,5 +1,8 @@
 use crate::prelude::*;
 
-/// This movement is NOT scaled by delta time
+#[derive(Component, Reflect)]
+#[reflect(Component)]
+pub struct TargetPosition(pub Vec2);
+
 #[derive(Component)]
-pub struct Movement(pub Vec2);
+pub struct MovementSpeed(pub f32);
