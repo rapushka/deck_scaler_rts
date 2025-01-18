@@ -1,3 +1,5 @@
+use bevy::input::mouse::{MouseButtonInput, MouseMotion};
+use bevy::window::PrimaryWindow;
 use crate::prelude::*;
 
 pub use feature::*;
@@ -28,12 +30,27 @@ impl Plugin for UnitPlugin {
 
 fn test_target_position(
     mut commands: Commands,
-
-    units: Query<(Entity), Without<TargetPosition>>,
+    units: Query<Entity>,
+    windows: Query<&Window, With<PrimaryWindow>>,
+    cameras: Query<(&Camera, &GlobalTransform)>,
 ) {
     for unit in units.iter() {
-        commands.entity(unit)
-            .insert(TargetPosition(Vec2::new(100.0, 100.0)))
-        ;
+        for (camera, camera_transform) in cameras.iter() {
+            for window in windows.iter() {
+                let Some(cursor_position) = window.cursor_position() else {
+                    continue;
+                };
+
+                let Ok(world_position) = camera.viewport_to_world(camera_transform, cursor_position) else {
+                    continue;
+                };
+
+                let position = world_position.origin.truncate();
+
+                commands.entity(unit)
+                    .insert(TargetPosition(position))
+                ;
+            }
+        }
     }
 }

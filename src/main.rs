@@ -5,6 +5,7 @@ use crate::gameplay::GameplayPlugin;
 use crate::camera::CameraPlugin;
 use crate::common::CommonPlugin;
 use crate::infrastructure::InfrastructurePlugin;
+use crate::input::*;
 
 mod gameplay;
 mod prelude;
@@ -13,6 +14,7 @@ mod camera;
 mod assets;
 mod infrastructure;
 mod common;
+mod input;
 
 fn main() {
     App::new()
@@ -23,6 +25,7 @@ fn main() {
         .add_plugins(GameplayPlugin)
         .add_plugins(CommonPlugin)
         .add_plugins(CameraPlugin)
+        .add_plugins(InputPlugin)
 
         .run();
 }
