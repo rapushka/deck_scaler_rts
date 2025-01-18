@@ -17,6 +17,6 @@ impl Plugin for AssetsPlugin {
 
 #[derive(AssetCollection, Resource)]
 pub struct UnitAssets {
-    #[asset(path = "unit/crook_head.png")]
+    #[asset(path = "unit/crook_head_small.png")]
     pub crook: Handle<Image>,
 }
