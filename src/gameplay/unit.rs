@@ -1,9 +1,8 @@
-use bevy::input::mouse::{MouseButtonInput, MouseMotion};
-use bevy::window::PrimaryWindow;
 use crate::prelude::*;
 
-pub use feature::*;
 use crate::gameplay::unit::view::*;
+use crate::input::{CursorPosition, PlayerInput};
+pub use feature::*;
 use stats::*;
 
 mod feature;
@@ -31,26 +30,13 @@ impl Plugin for UnitPlugin {
 fn test_target_position(
     mut commands: Commands,
     units: Query<Entity>,
-    windows: Query<&Window, With<PrimaryWindow>>,
-    cameras: Query<(&Camera, &GlobalTransform)>,
+    inputs: Query<&CursorPosition, With<PlayerInput>>,
 ) {
     for unit in units.iter() {
-        for (camera, camera_transform) in cameras.iter() {
-            for window in windows.iter() {
-                let Some(cursor_position) = window.cursor_position() else {
-                    continue;
-                };
-
-                let Ok(world_position) = camera.viewport_to_world(camera_transform, cursor_position) else {
-                    continue;
-                };
-
-                let position = world_position.origin.truncate();
-
-                commands.entity(unit)
-                    .insert(TargetPosition(position))
-                ;
-            }
+        for cursor_position in inputs.iter() {
+            commands.entity(unit)
+                .insert(TargetPosition(cursor_position.0))
+            ;
         }
     }
 }
