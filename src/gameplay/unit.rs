@@ -29,7 +29,7 @@ impl Plugin for UnitPlugin {
 
 fn test_target_position(
     mut commands: Commands,
-    units: Query<Entity>,
+    units: Query<Entity, With<UnitID>>,
     inputs: Query<&CursorPosition, With<PlayerInput>>,
 ) {
     for unit in units.iter() {
