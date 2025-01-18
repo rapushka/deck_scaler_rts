@@ -30,10 +30,15 @@ impl Plugin for UnitPlugin {
 fn test_target_position(
     mut commands: Commands,
     units: Query<Entity, With<UnitID>>,
-    inputs: Query<&CursorPosition, With<PlayerInput>>,
+    cursors: Query<&CursorPosition, With<PlayerInput>>,
+    input: Res<ButtonInput<MouseButton>>,
 ) {
+    if !input.just_pressed(MouseButton::Left) {
+        return;
+    }
+
     for unit in units.iter() {
-        for cursor_position in inputs.iter() {
+        for cursor_position in cursors.iter() {
             commands.entity(unit)
                 .insert(TargetPosition(cursor_position.0))
             ;
