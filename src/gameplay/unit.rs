@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 use crate::gameplay::unit::view::*;
-use crate::input::{CursorPosition, PlayerInput};
+use crate::input::{CursorPosition, JustClicked, PlayerInput};
 pub use feature::*;
 use stats::*;
 
@@ -30,13 +30,8 @@ impl Plugin for UnitPlugin {
 fn test_target_position(
     mut commands: Commands,
     units: Query<Entity, With<UnitID>>,
-    cursors: Query<&CursorPosition, With<PlayerInput>>,
-    input: Res<ButtonInput<MouseButton>>,
+    cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClicked>)>,
 ) {
-    if !input.just_pressed(MouseButton::Left) {
-        return;
-    }
-
     for unit in units.iter() {
         for cursor_position in cursors.iter() {
             commands.entity(unit)

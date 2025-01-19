@@ -11,7 +11,10 @@ impl Plugin for InputPlugin {
         app
             .add_systems(Startup, init_input)
 
-            .add_systems(Update, update_cursor_position.in_set(Order::Input))
+            .add_systems(Update, (
+                update_cursor_position,
+                update_cursor_click
+            ).in_set(Order::Input))
         ;
     }
 }
