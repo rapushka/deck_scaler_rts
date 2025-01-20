@@ -1,4 +1,5 @@
 use crate::gameplay::unit::side::feature::OnPlayerSide;
+use crate::input::{CursorPosition, JustClickedSelect, PlayerInput};
 use crate::prelude::*;
 use crate::prelude::selection::feature::SelectedUnit;
 
@@ -15,5 +16,19 @@ pub fn mark_clicked_units_as_selected(
         commands.entity(unit)
             .insert(SelectedUnit)
         ;
+    }
+}
+
+pub fn deselect_current_units_on_new_selection(
+    mut commands: Commands,
+    selected_units: Query<(Entity), With<SelectedUnit>>,
+    clicks: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedSelect>)>,
+) {
+    for _click in clicks.iter() {
+        for unit in selected_units.iter() {
+            commands.entity(unit)
+                .remove::<SelectedUnit>()
+            ;
+        }
     }
 }

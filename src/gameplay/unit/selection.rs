@@ -1,6 +1,6 @@
 use crate::gameplay::unit::selection::feature::SelectedUnit;
 use crate::prelude::*;
-use crate::prelude::selection::feature::mark_clicked_units_as_selected;
+use crate::prelude::selection::feature::*;
 use crate::prelude::selection::view::SelectionViewPlugin;
 
 pub mod feature;
@@ -14,7 +14,11 @@ impl Plugin for UnitSelectionPlugin {
         app
             .add_plugins(SelectionViewPlugin)
 
-            .add_systems(Update, mark_clicked_units_as_selected.in_set(Order::Preprocess))
+            .add_systems(Update, (
+                deselect_current_units_on_new_selection,
+                mark_clicked_units_as_selected,
+            ).chain()
+                .in_set(Order::Preprocess))
         ;
     }
 }

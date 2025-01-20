@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 use crate::gameplay::unit::view::*;
-use crate::input::{CursorPosition, JustClicked, PlayerInput};
+use crate::input::{CursorPosition, JustClickedSelect, PlayerInput};
 pub use feature::*;
 use stats::*;
 pub use selection::*;

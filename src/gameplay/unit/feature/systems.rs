@@ -1,7 +1,7 @@
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
-use crate::input::{CursorPosition, JustClicked, PlayerInput};
+use crate::input::{CursorPosition, JustClickedOrder, JustClickedSelect, PlayerInput};
 use crate::prelude::selection::feature::SelectedUnit;
 use crate::prelude::*;
 
@@ -45,7 +45,7 @@ pub fn spawn_unit(
 pub fn test_target_position(
     mut commands: Commands,
     units: Query<Entity, (With<UnitID>, With<SelectedUnit>)>,
-    cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClicked>)>,
+    cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedOrder>)>,
 ) {
     for unit in units.iter() {
         for cursor_position in cursors.iter() {

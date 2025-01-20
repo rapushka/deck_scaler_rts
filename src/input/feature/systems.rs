@@ -1,5 +1,5 @@
 use bevy::window::PrimaryWindow;
-use crate::input::{CursorPosition, JustClicked, PlayerInput};
+use crate::input::{bindings, CursorPosition, JustClickedOrder, JustClickedSelect, PlayerInput};
 use crate::prelude::*;
 
 pub fn init_input(
@@ -35,18 +35,33 @@ pub fn update_cursor_position(
     }
 }
 
-pub fn update_cursor_click(
+pub fn update_cursor_selection_click(
     mut commands: Commands,
     cursors: Query<Entity, With<PlayerInput>>,
     input: Res<ButtonInput<MouseButton>>,
 ) {
     for cursor in cursors.iter() {
-        let is_clicked = input.just_pressed(MouseButton::Left);
+        let is_clicked = input.just_pressed(bindings::SELECT);
 
         if is_clicked {
-            commands.entity(cursor).insert(JustClicked);
+            commands.entity(cursor).insert(JustClickedSelect);
         } else {
-            commands.entity(cursor).remove::<JustClicked>();
+            commands.entity(cursor).remove::<JustClickedSelect>();
+        }
+    }
+}
+pub fn update_cursor_order_click(
+    mut commands: Commands,
+    cursors: Query<Entity, With<PlayerInput>>,
+    input: Res<ButtonInput<MouseButton>>,
+) {
+    for cursor in cursors.iter() {
+        let is_clicked = input.just_pressed(bindings::ORDER_TARGET);
+
+        if is_clicked {
+            commands.entity(cursor).insert(JustClickedOrder);
+        } else {
+            commands.entity(cursor).remove::<JustClickedOrder>();
         }
     }
 }
