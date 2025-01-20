@@ -5,11 +5,13 @@ use crate::input::{CursorPosition, JustClicked, PlayerInput};
 pub use feature::*;
 use stats::*;
 pub use selection::*;
+use crate::gameplay::unit::side::UnitSidePlugin;
 
 mod feature;
 mod view;
 mod stats;
 pub mod selection;
+mod side;
 
 pub struct UnitPlugin;
 
@@ -19,6 +21,7 @@ impl Plugin for UnitPlugin {
             .add_plugins(UnitViewPlugin)
             .add_plugins(StatsPlugin)
             .add_plugins(UnitSelectionPlugin)
+            .add_plugins(UnitSidePlugin)
 
             .add_event::<SpawnUnit>()
 
