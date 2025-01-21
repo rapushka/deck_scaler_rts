@@ -1,5 +1,5 @@
-use crate::gameplay::unit::auto_mode::auto_attack::feature::set_closest_enemy_as_opponent;
 use crate::prelude::*;
+pub use feature::*;
 
 mod feature;
 

@@ -15,7 +15,7 @@ impl Plugin for StatsPlugin {
             .register_type::<StatsModifiers>()
 
             .add_systems(Update, (
-                update_movement_speed,
+                update_stats,
             ).in_set(Order::Preprocess))
         ;
     }

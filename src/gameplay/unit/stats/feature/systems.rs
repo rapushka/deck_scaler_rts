@@ -1,8 +1,8 @@
-use crate::gameplay::unit::attack::Range;
+use crate::gameplay::unit::attack::{AttackChargeDuration, Range};
 use crate::gameplay::unit::stats::{BaseStats, MovementSpeed, Stat, StatsModifiers};
 use crate::prelude::*;
 
-pub fn update_movement_speed(
+pub fn update_stats(
     mut commands: Commands,
     entities: Query<(Entity, &BaseStats, &StatsModifiers)>,
 ) {
@@ -14,6 +14,7 @@ pub fn update_movement_speed(
         commands.entity(entity)
             .insert(MovementSpeed(calculate(Stat::MovementSpeed)))
             .insert(Range(calculate(Stat::Range)))
+            .insert(AttackChargeDuration(calculate(Stat::AttackChargeDuration)))
         ;
     }
 }

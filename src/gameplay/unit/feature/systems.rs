@@ -4,6 +4,7 @@ use crate::gameplay::unit::view::LoadingView;
 use crate::input::{CursorPosition, JustClickedOrder, PlayerInput};
 use crate::prelude::selection::feature::SelectedUnit;
 use crate::prelude::*;
+use crate::prelude::auto_mode::AutoAttackState;
 
 pub fn test_require_spawn_unit(
     mut events: EventWriter<SpawnUnit>,
@@ -33,7 +34,8 @@ pub fn spawn_unit(
     for SpawnUnit { id, position, side } in events.read() {
         let stats = Stats::from(StatProps {
             movement_speed: 100.0,
-            range: 50.0,
+            range: 150.0,
+            attack_charge_duration: 1.0,
         });
 
         commands.spawn(Name::from(f!("{id:?}")))
@@ -41,14 +43,15 @@ pub fn spawn_unit(
             .insert(LoadingView)
             .insert(BaseStats(stats))
             .insert(StatsModifiers(Stats::empty()))
-            .insert(CircleCollider::new(100.0))
+            .insert(CircleCollider::new(75.0))
             .insert(Transform::from_translation(position.extend(0.0)))
             .insert(*side)
+            .insert(AutoAttackState)
         ;
     }
 }
 
-pub fn test_target_position(
+pub fn order_target_position(
     mut commands: Commands,
     units: Query<Entity, (With<UnitID>, With<SelectedUnit>)>,
     cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedOrder>)>,
