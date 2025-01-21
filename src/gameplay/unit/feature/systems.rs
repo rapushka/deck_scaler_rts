@@ -35,6 +35,7 @@ pub fn spawn_unit(
         let stats = Stats::from(StatProps {
             movement_speed: 100.0,
             range: 150.0,
+            attack_charge_duration: 1.0,
         });
 
         commands.spawn(Name::from(f!("{id:?}")))

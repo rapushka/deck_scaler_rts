@@ -4,4 +4,7 @@ use crate::prelude::*;
 pub struct Range(pub f32);
 
 #[derive(Component)]
-pub struct ChargeAttack(pub Entity);
+pub struct AttackChargeDuration(pub f32);
+
+#[derive(Component)]
+pub struct ChargingAttack(pub Timer);
