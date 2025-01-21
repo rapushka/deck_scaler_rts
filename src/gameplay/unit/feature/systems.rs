@@ -34,7 +34,7 @@ pub fn spawn_unit(
     for SpawnUnit { id, position, side } in events.read() {
         let stats = Stats::from(StatProps {
             movement_speed: 100.0,
-            range: 50.0,
+            range: 150.0,
         });
 
         commands.spawn(Name::from(f!("{id:?}")))
