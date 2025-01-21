@@ -10,12 +10,12 @@ pub fn test_require_spawn_unit(
 ) {
     events.send(SpawnUnit {
         id: UnitID::Crook,
-        position: Vec2::new(0.0, 0.0),
+        position: Vec2::new(0.0, -200.0),
         side: Side::Player,
     });
     events.send(SpawnUnit {
         id: UnitID::Crook,
-        position: Vec2::new(-200.0, 0.0),
+        position: Vec2::new(-150.0, -200.0),
         side: Side::Player,
     });
 
