@@ -1,13 +1,17 @@
 use crate::prelude::*;
 
 use crate::gameplay::unit::view::*;
-use crate::input::{CursorPosition, JustClicked, PlayerInput};
+use crate::input::{CursorPosition, JustClickedSelect, PlayerInput};
 pub use feature::*;
 use stats::*;
+pub use selection::*;
+use crate::gameplay::unit::side::UnitSidePlugin;
 
 mod feature;
 mod view;
 mod stats;
+pub mod selection;
+mod side;
 
 pub struct UnitPlugin;
 
@@ -16,6 +20,8 @@ impl Plugin for UnitPlugin {
         app
             .add_plugins(UnitViewPlugin)
             .add_plugins(StatsPlugin)
+            .add_plugins(UnitSelectionPlugin)
+            .add_plugins(UnitSidePlugin)
 
             .add_event::<SpawnUnit>()
 
@@ -24,19 +30,5 @@ impl Plugin for UnitPlugin {
 
             .add_systems(Update, test_target_position.after(spawn_unit))
         ;
-    }
-}
-
-fn test_target_position(
-    mut commands: Commands,
-    units: Query<Entity, With<UnitID>>,
-    cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClicked>)>,
-) {
-    for unit in units.iter() {
-        for cursor_position in cursors.iter() {
-            commands.entity(unit)
-                .insert(TargetPosition(cursor_position.0))
-            ;
-        }
     }
 }
