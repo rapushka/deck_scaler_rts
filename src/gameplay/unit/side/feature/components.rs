@@ -6,6 +6,15 @@ pub enum Side {
     Enemy,
 }
 
+impl Side {
+    pub fn flip(&self) -> Self {
+        match self {
+            Side::Player => Side::Enemy,
+            Side::Enemy => Side::Player,
+        }
+    }
+}
+
 #[derive(Component)]
 pub struct OnPlayerSide;
 
