@@ -1,4 +1,3 @@
-use crate::gameplay::unit::attack::Range;
 use crate::gameplay::unit::auto_mode::auto_attack::feature::AutoAttackState;
 use crate::gameplay::unit::opponent::Opponent;
 use crate::gameplay::unit::side::feature::Side;
@@ -6,13 +5,12 @@ use crate::prelude::*;
 
 pub fn set_closest_enemy_as_opponent(
     mut commands: Commands,
-    attackers: Query<(Entity, &Transform, &Side, &Range), (With<UnitID>, With<AutoAttackState>)>,
+    attackers: Query<(Entity, &Transform, &Side), (With<UnitID>, With<AutoAttackState>)>,
     targets: Query<(Entity, &Transform, &Side), With<UnitID>>,
 ) {
     for attacker in attackers.iter() {
         let opponent_side = attacker.2.flip();
         let attacker_position = attacker.1.translation;
-        let attacker_range = attacker.3.0;
 
         let mut closest_enemy = None;
         let mut distance_to_closest_enemy = None;
@@ -25,9 +23,6 @@ pub fn set_closest_enemy_as_opponent(
 
             let target_position = target.1.translation;
             let distance_to_target = attacker_position.distance(target_position);
-            if distance_to_target > attacker_range { // TODO: remove attacker_range check
-                continue;
-            }
 
             if let Some(distance) = distance_to_closest_enemy {
                 if distance >= distance_to_target {
