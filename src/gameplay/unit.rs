@@ -16,7 +16,7 @@ mod stats;
 pub mod selection;
 mod side;
 mod opponent;
-mod auto_mode;
+pub mod auto_mode;
 mod attack;
 
 pub struct UnitPlugin;
@@ -35,9 +35,11 @@ impl Plugin for UnitPlugin {
             .add_event::<SpawnUnit>()
 
             .add_systems(OnEnter(AppState::Gameplay), test_require_spawn_unit)
-            .add_systems(Update, spawn_unit.run_if(in_state(AppState::Gameplay)).in_set(Order::GameLogic))
 
-            .add_systems(Update, test_target_position.after(spawn_unit))
+            .add_systems(Update, (
+                spawn_unit,
+                order_target_position,
+            ).run_if(in_state(AppState::Gameplay)).in_set(Order::GameLogic))
         ;
     }
 }
