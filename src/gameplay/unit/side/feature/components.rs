@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-#[derive(Component, Debug, Copy, Clone)]
+#[derive(Component, Debug, Copy, Clone, Eq, PartialEq)]
 pub enum Side {
     Player,
     Enemy,

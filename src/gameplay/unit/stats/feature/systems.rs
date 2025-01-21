@@ -1,3 +1,4 @@
+use crate::gameplay::unit::attack::Range;
 use crate::gameplay::unit::stats::{BaseStats, MovementSpeed, Stat, StatsModifiers};
 use crate::prelude::*;
 
@@ -6,13 +7,13 @@ pub fn update_movement_speed(
     entities: Query<(Entity, &BaseStats, &StatsModifiers)>,
 ) {
     for (entity, base_stats, modifiers) in entities.iter() {
-        let base_speed = base_stats.get(&Stat::MovementSpeed);
-        let modifier = modifiers.get(&Stat::MovementSpeed);
-
-        let speed = modifier.modify(base_speed);
+        let calculate = |stat: Stat| -> f32{
+            modifiers.get(&stat).modify(base_stats.get(&stat))
+        };
 
         commands.entity(entity)
-            .insert(MovementSpeed(speed))
+            .insert(MovementSpeed(calculate(Stat::MovementSpeed)))
+            .insert(Range(calculate(Stat::Range)))
         ;
     }
 }
