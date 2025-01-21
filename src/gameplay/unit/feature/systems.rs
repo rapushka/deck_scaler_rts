@@ -1,7 +1,7 @@
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
-use crate::input::{CursorPosition, JustClickedOrder, JustClickedSelect, PlayerInput};
+use crate::input::{CursorPosition, JustClickedOrder, PlayerInput};
 use crate::prelude::selection::feature::SelectedUnit;
 use crate::prelude::*;
 
@@ -13,10 +13,15 @@ pub fn test_require_spawn_unit(
         position: Vec2::new(0.0, 0.0),
         side: Side::Player,
     });
+    events.send(SpawnUnit {
+        id: UnitID::Crook,
+        position: Vec2::new(-200.0, 0.0),
+        side: Side::Player,
+    });
 
     events.send(SpawnUnit {
         id: UnitID::Crook, // TODO: add new unit id for enemy
-        position: Vec2::new(200.0, 0.0),
+        position: Vec2::new(100.0, 200.0),
         side: Side::Enemy,
     });
 }
