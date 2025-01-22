@@ -20,6 +20,7 @@ bevy = "0.15"
 tiny_bail = "0.4"
 bevy_asset_loader = { version = "0.22", features = ["2d"] }
 bevy-inspector-egui = "0.28"
+log = "0.4.25"
 
 # These lints may be important signals about code quality, but normal Bevy code
 # commonly triggers them and the CI workflow treats them as errors, so we've

@@ -33,13 +33,13 @@ pub fn spawn_unit(
 ) {
     for SpawnUnit { id, position, side } in events.read() {
         let id = *id;
-        let stats = Stats::from(get_base_stats(id));
+        let stats = StatsMap::new(get_base_stats(id));
 
         commands.spawn(Name::from(f!("{id:?}")))
             .insert(id)
             .insert(LoadingView)
             .insert(BaseStats(stats))
-            .insert(StatsModifiers(Stats::empty()))
+            .insert(StatsModifiers(StatsMap::empty()))
             .insert(CircleCollider::new(75.0))
             .insert(Transform::from_translation(position.extend(0.0)))
             .insert(*side)
@@ -48,7 +48,7 @@ pub fn spawn_unit(
     }
 }
 
-fn get_base_stats(unit_id: UnitID) -> StatProps {
+fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
     match unit_id {
         UnitID::Crook => StatProps {
             movement_speed: 100.0,

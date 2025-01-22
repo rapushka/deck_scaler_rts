@@ -1908,6 +1908,7 @@ dependencies = [
  "bevy",
  "bevy-inspector-egui",
  "bevy_asset_loader",
+ "log",
  "tiny_bail",
 ]
 

@@ -1,13 +1,13 @@
-use crate::gameplay::unit::stats::{Modifier, Stat, Stats};
+use crate::gameplay::unit::stats::{Modifier, Stat, StatsMap};
 use crate::prelude::*;
 
 #[derive(Component, Reflect)]
 #[reflect(Component)]
-pub struct BaseStats(pub Stats<f32>);
+pub struct BaseStats(pub StatsMap<f32>);
 
 #[derive(Component, Reflect)]
 #[reflect(Component)]
-pub struct StatsModifiers(pub Stats<Modifier>);
+pub struct StatsModifiers(pub StatsMap<Modifier>);
 
 impl BaseStats {
     pub fn get(&self, stat: &Stat) -> f32 {
