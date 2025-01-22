@@ -19,4 +19,7 @@ impl Plugin for AssetsPlugin {
 pub struct UnitAssets {
     #[asset(path = "unit/crook_head_small.png")]
     pub crook: Handle<Image>,
+
+    #[asset(path = "unit/rat_head_small.png")]
+    pub rat: Handle<Image>,
 }

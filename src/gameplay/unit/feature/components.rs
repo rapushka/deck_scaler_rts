@@ -4,6 +4,7 @@ use crate::prelude::*;
 #[derive(Component, Debug, Copy, Clone)]
 pub enum UnitID {
     Crook,
+    Rat,
 }
 
 #[derive(Event)]

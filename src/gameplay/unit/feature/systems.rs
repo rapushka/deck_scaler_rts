@@ -21,7 +21,7 @@ pub fn test_require_spawn_unit(
     });
 
     events.send(SpawnUnit {
-        id: UnitID::Crook, // TODO: add new unit id for enemy
+        id: UnitID::Rat,
         position: Vec2::new(100.0, 200.0),
         side: Side::Enemy,
     });
@@ -32,14 +32,11 @@ pub fn spawn_unit(
     mut events: EventReader<SpawnUnit>,
 ) {
     for SpawnUnit { id, position, side } in events.read() {
-        let stats = Stats::from(StatProps {
-            movement_speed: 100.0,
-            range: 150.0,
-            attack_charge_duration: 1.0,
-        });
+        let id = *id;
+        let stats = Stats::from(get_base_stats(id));
 
         commands.spawn(Name::from(f!("{id:?}")))
-            .insert(*id)
+            .insert(id)
             .insert(LoadingView)
             .insert(BaseStats(stats))
             .insert(StatsModifiers(Stats::empty()))
@@ -48,6 +45,21 @@ pub fn spawn_unit(
             .insert(*side)
             .insert(AutoAttackState)
         ;
+    }
+}
+
+fn get_base_stats(unit_id: UnitID) -> StatProps {
+    match unit_id {
+        UnitID::Crook => StatProps {
+            movement_speed: 100.0,
+            range: 150.0,
+            attack_charge_duration: 1.0,
+        },
+        UnitID::Rat => StatProps {
+            movement_speed: 150.0,
+            range: 75.0,
+            attack_charge_duration: 1.5,
+        },
     }
 }
 
