@@ -10,7 +10,8 @@ pub fn load_unit_view(
 ) {
     for (unit, unit_id) in units.iter() {
         let sprite = match unit_id {
-            UnitID::Crook => assets.crook.clone()
+            UnitID::Crook => assets.crook.clone(),
+            UnitID::Rat => assets.rat.clone(),
         };
 
         commands.entity(unit)
