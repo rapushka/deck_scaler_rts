@@ -3,6 +3,7 @@
 - [units selection](https://github.com/rapushka/deck_scaler_rts/pull/4)
 - [new unit: Rat](https://github.com/rapushka/deck_scaler_rts/pull/9)
 - [Health and HealthBars are added!](https://github.com/rapushka/deck_scaler_rts/pull/11)
+- [unit state change](https://github.com/rapushka/deck_scaler_rts/pull/13)
 
 # v0.0.17
 - this repo created
