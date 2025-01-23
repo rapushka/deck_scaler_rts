@@ -13,7 +13,8 @@ impl Plugin for InfrastructurePlugin {
                 Order::Preprocess,
                 Order::GameLogic,
                 Order::Postprocess,
-                Order::Cleanups
+                Order::View,
+                Order::Cleanups,
             ).chain())
 
             .init_state::<AppState>()

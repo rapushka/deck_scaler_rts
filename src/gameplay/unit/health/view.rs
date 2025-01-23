@@ -13,7 +13,7 @@ impl Plugin for HealthViewPlugin {
             .add_systems(Update, (
                 spawn_health_bars,
                 update_health_bars,
-            ).in_set(Order::Postprocess))
+            ).in_set(Order::View))
         ;
     }
 }

@@ -11,6 +11,7 @@ pub fn load_unit_view(
     for (unit, unit_id) in units.iter() {
         let info_container = commands.spawn(Name::from("info"))
             .insert(Transform::from_translation(Vec3 { x: 0.0, y: -55.0, z: 10.0 }))
+            .insert(Visibility::default())
             .set_parent(unit)
             .id();
 

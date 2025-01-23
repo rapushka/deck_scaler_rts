@@ -1,5 +1,5 @@
-use crate::gameplay::unit::health::*;
 use crate::gameplay::unit::health::view::*;
+use crate::gameplay::unit::health::*;
 use crate::gameplay::unit::view::UnitInfoContainer;
 
 pub fn spawn_health_bars(
@@ -13,6 +13,7 @@ pub fn spawn_health_bars(
         let health_bar = commands.spawn(Name::new("Health Bar"))
             .set_parent(container.0)
             .insert(Text2d::new(f!("{health}/{max_health}")))
+            .insert(TextColor::from(Color::Srgba(Srgba::new(0.75, 0.0, 0.0, 1.0))))
             .id();
 
         commands.entity(entity)
