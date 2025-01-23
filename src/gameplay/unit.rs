@@ -1,12 +1,12 @@
 use crate::prelude::*;
 
 use crate::gameplay::unit::view::*;
-use crate::input::{CursorPosition, JustClickedSelect, PlayerInput};
 pub use feature::*;
 use stats::*;
 pub use selection::*;
 use crate::gameplay::unit::attack::AttackPlugin;
-use crate::gameplay::unit::auto_mode::*;
+use behaviour_state::auto_mode::*;
+use crate::gameplay::unit::behaviour_state::UnitBehaviourPlugin;
 use crate::gameplay::unit::health::HealthPlugin;
 use crate::gameplay::unit::opponent::*;
 use crate::gameplay::unit::side::*;
@@ -18,7 +18,7 @@ mod stats;
 pub mod selection;
 mod side;
 mod opponent;
-pub mod auto_mode;
+mod behaviour_state;
 mod attack;
 mod health;
 
@@ -32,7 +32,7 @@ impl Plugin for UnitPlugin {
             .add_plugins(UnitSelectionPlugin)
             .add_plugins(UnitSidePlugin)
             .add_plugins(OpponentPlugin)
-            .add_plugins(AutoAttackPlugin)
+            .add_plugins(UnitBehaviourPlugin)
             .add_plugins(AttackPlugin)
             .add_plugins(HealthPlugin)
 

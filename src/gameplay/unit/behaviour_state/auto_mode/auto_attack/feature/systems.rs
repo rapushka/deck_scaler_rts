@@ -1,4 +1,4 @@
-use crate::gameplay::unit::auto_mode::auto_attack::feature::AutoAttackState;
+use crate::gameplay::unit::behaviour_state::auto_mode::auto_attack::feature::AutoAttackState;
 use crate::gameplay::unit::opponent::Opponent;
 use crate::gameplay::unit::side::feature::Side;
 use crate::prelude::*;

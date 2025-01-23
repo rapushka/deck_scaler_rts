@@ -5,7 +5,7 @@ use crate::gameplay::unit::view::LoadingView;
 use crate::input::{CursorPosition, JustClickedOrder, PlayerInput};
 use crate::prelude::selection::feature::SelectedUnit;
 use crate::prelude::*;
-use crate::prelude::auto_mode::AutoAttackState;
+use crate::gameplay::unit::behaviour_state::auto_mode::AutoAttackState;
 
 pub fn test_require_spawn_unit(
     mut events: EventWriter<SpawnUnit>,
