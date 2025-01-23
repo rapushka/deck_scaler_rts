@@ -1,5 +1,5 @@
 pub use components::*;
-pub(super) use systems::*;
+pub(in crate::gameplay::unit) use systems::*;
 
 mod components;
 mod systems;
