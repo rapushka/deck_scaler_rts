@@ -12,7 +12,7 @@ impl Plugin for SelectionViewPlugin {
 }
 
 fn paint_selected_unit(
-    mut units: Query<(&mut Sprite, Option<&SelectedUnit>), (With<UnitID>)>,
+    mut units: Query<(&mut Sprite, Option<&SelectedUnit>), With<UnitID>>,
 ) {
     for (mut sprite, selected) in units.iter_mut() {
         let highlighted_color = Srgba::new(1.0, 1.0, 0.5, 1.0);

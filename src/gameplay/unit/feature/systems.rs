@@ -1,3 +1,4 @@
+use crate::gameplay::unit::health::Health;
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
@@ -33,17 +34,19 @@ pub fn spawn_unit(
 ) {
     for SpawnUnit { id, position, side } in events.read() {
         let id = *id;
-        let stats = StatsMap::new(get_base_stats(id));
+        let stat_props = get_base_stats(id);
+        let health = stat_props.max_health;
 
         commands.spawn(Name::from(f!("{id:?}")))
             .insert(id)
             .insert(LoadingView)
-            .insert(BaseStats(stats))
-            .insert(StatsModifiers(StatsMap::empty()))
+            .insert(BaseStats::new(stat_props))
+            .insert(StatsModifiers::empty())
             .insert(CircleCollider::new(75.0))
             .insert(Transform::from_translation(position.extend(0.0)))
             .insert(*side)
             .insert(AutoAttackState)
+            .insert(Health(health))
         ;
     }
 }
