@@ -2,7 +2,7 @@ use crate::gameplay::unit::health::*;
 use crate::gameplay::unit::health::view::*;
 use crate::gameplay::unit::view::UnitInfoContainer;
 
-pub fn spawn_health_bar(
+pub fn spawn_health_bars(
     mut commands: Commands,
     entities: Query<(Entity, &Health, &MaxHealth, &UnitInfoContainer), Without<HealthBar>>,
 ) {
@@ -18,5 +18,18 @@ pub fn spawn_health_bar(
         commands.entity(entity)
             .insert(HealthBar(health_bar))
         ;
+    }
+}
+
+pub fn update_health_bars(
+    units: Query<(&HealthBar, &Health, &MaxHealth)>,
+    mut texts: Query<&mut Text2d>,
+) {
+    for (health_bar, health, max_health) in units.iter() {
+        let health = health.0;
+        let max_health = max_health.0;
+        let mut health_bar_text = texts.get_mut(health_bar.0).expect("Health Bar must have Text");
+
+        health_bar_text.0 = f!("{health}/{max_health}");
     }
 }

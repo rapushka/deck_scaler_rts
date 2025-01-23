@@ -10,7 +10,10 @@ impl Plugin for HealthViewPlugin {
         app
             .register_type::<HealthBar>()
 
-            .add_systems(Update, spawn_health_bar.in_set(Order::Postprocess))
+            .add_systems(Update, (
+                spawn_health_bars,
+                update_health_bars,
+            ).in_set(Order::Postprocess))
         ;
     }
 }
