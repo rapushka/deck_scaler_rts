@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 pub use feature::*;
-use crate::input::unit_control::UnitControlInputPlugin;
+pub use crate::input::unit_control::*;
 
 mod feature;
 pub mod bindings;

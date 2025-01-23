@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 #[derive(Event)]
-pub struct SetManualUnitStateRequested;
+pub struct SetManualUnitStateRequest;
 
 #[derive(Event)]
-pub struct SetAutoUnitStateRequested;
+pub struct SetAutoUnitStateRequest;
