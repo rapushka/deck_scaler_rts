@@ -1,6 +1,5 @@
 use crate::prelude::*;
 pub use feature::*;
-use crate::gameplay::unit::feature::spawn_unit;
 
 mod feature;
 
@@ -11,7 +10,7 @@ impl Plugin for HealthViewPlugin {
         app
             .register_type::<HealthBar>()
 
-            .add_systems(Update, spawn_health_bar.after(spawn_unit))
+            .add_systems(Update, spawn_health_bar.in_set(Order::Postprocess))
         ;
     }
 }
