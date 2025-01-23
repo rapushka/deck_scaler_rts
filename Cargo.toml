@@ -21,11 +21,6 @@ tiny_bail = "0.4"
 bevy_asset_loader = { version = "0.22", features = ["2d"] }
 bevy-inspector-egui = "0.28"
 
-# These lints may be important signals about code quality, but normal Bevy code
-# commonly triggers them and the CI workflow treats them as errors, so we've
-# chosen to allow them in this template.
-#
-# Feel free to delete the following lines.
 [lints.clippy]
 too_many_arguments = "allow"
 type_complexity = "allow"

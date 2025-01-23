@@ -21,7 +21,7 @@ pub fn mark_clicked_units_as_selected(
 
 pub fn deselect_current_units_on_new_selection(
     mut commands: Commands,
-    selected_units: Query<(Entity), With<SelectedUnit>>,
+    selected_units: Query<Entity, With<SelectedUnit>>,
     clicks: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedSelect>)>,
 ) {
     for _click in clicks.iter() {

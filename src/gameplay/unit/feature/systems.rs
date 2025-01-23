@@ -1,3 +1,4 @@
+use crate::gameplay::unit::health::Health;
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
@@ -33,32 +34,36 @@ pub fn spawn_unit(
 ) {
     for SpawnUnit { id, position, side } in events.read() {
         let id = *id;
-        let stats = Stats::from(get_base_stats(id));
+        let stat_props = get_base_stats(id);
+        let health = stat_props.max_health;
 
         commands.spawn(Name::from(f!("{id:?}")))
             .insert(id)
             .insert(LoadingView)
-            .insert(BaseStats(stats))
-            .insert(StatsModifiers(Stats::empty()))
+            .insert(BaseStats::new(stat_props))
+            .insert(StatsModifiers::empty())
             .insert(CircleCollider::new(75.0))
             .insert(Transform::from_translation(position.extend(0.0)))
             .insert(*side)
             .insert(AutoAttackState)
+            .insert(Health(health))
         ;
     }
 }
 
-fn get_base_stats(unit_id: UnitID) -> StatProps {
+fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
     match unit_id {
         UnitID::Crook => StatProps {
             movement_speed: 100.0,
             range: 150.0,
             attack_charge_duration: 1.0,
+            max_health: 20.0,
         },
         UnitID::Rat => StatProps {
             movement_speed: 150.0,
             range: 75.0,
             attack_charge_duration: 1.5,
+            max_health: 5.0,
         },
     }
 }

@@ -7,6 +7,7 @@ use stats::*;
 pub use selection::*;
 use crate::gameplay::unit::attack::AttackPlugin;
 use crate::gameplay::unit::auto_mode::*;
+use crate::gameplay::unit::health::HealthPlugin;
 use crate::gameplay::unit::opponent::*;
 use crate::gameplay::unit::side::*;
 
@@ -19,6 +20,7 @@ mod side;
 mod opponent;
 pub mod auto_mode;
 mod attack;
+mod health;
 
 pub struct UnitPlugin;
 
@@ -32,6 +34,7 @@ impl Plugin for UnitPlugin {
             .add_plugins(OpponentPlugin)
             .add_plugins(AutoAttackPlugin)
             .add_plugins(AttackPlugin)
+            .add_plugins(HealthPlugin)
 
             .add_event::<SpawnUnit>()
 
