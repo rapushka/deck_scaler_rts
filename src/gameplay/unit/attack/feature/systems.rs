@@ -43,8 +43,6 @@ pub fn on_attack_charged(
             continue;
         }
 
-        println!("{attacker} attacks!"); // TODO: REMOVE ME
-
         commands.entity(attacker)
             .remove::<ChargingAttack>()
         ;
