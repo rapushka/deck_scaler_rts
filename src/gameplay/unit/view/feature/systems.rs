@@ -21,6 +21,8 @@ pub fn load_unit_view(
             .id();
 
         commands.entity(unit)
+            .insert(Visibility::default())
+
             .add_child(info_container)
             .insert(UnitInfoContainer(info_container))
 

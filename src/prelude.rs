@@ -3,6 +3,7 @@
 
 pub use bevy::prelude::*;
 pub use tiny_bail::prelude::*;
+pub use bevy_tween::prelude::*;
 
 pub use crate::infrastructure::app_state::*;
 pub use crate::infrastructure::order::*;

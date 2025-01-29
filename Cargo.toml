@@ -20,6 +20,7 @@ bevy = "0.15"
 tiny_bail = "0.4"
 bevy_asset_loader = { version = "0.22", features = ["2d"] }
 bevy-inspector-egui = "0.28"
+bevy_tween = "0.7"
 
 [lints.clippy]
 too_many_arguments = "allow"
