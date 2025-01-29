@@ -1,6 +1,6 @@
 [package]
 name = "deck_scaler_rts"
-version = "0.0.18"
+version = "0.0.19"
 edition = "2021"
 license = "MIT OR Apache-2.0 OR CC0-1.0"
 
