@@ -10,14 +10,52 @@ pub fn play_attack_animation(
     mut commands: Commands,
     mut events: EventReader<AttackCharged>,
     units: Query<(Entity, &UnitHeadView, &Opponent), Without<PlayingAttackAnimation>>, // TODO: blacklist PlayingAttackAnimation in other places
+    transforms: Query<&Transform>,
 ) {
     for AttackCharged(attacker) in events.read() {
         let (unit, UnitHeadView(head), Opponent(opponent)) = cq!(units.get(*attacker));
+        let transform = cq!(transforms.get(*head));
+        let opponent_position = cq!(transforms.get(*opponent)).translation;
+        let initial_position = transform.translation;
 
-        info!("attacking");
+        let target = head.into_target();
+        let mut transform = target.transform_state(*transform);
 
+        let offset = Vec3::Y * 10.0;
         commands.entity(unit)
-            .insert(PlayingAttackAnimation(Timer::from_seconds(ATTACK_ANIMATION_DURATION, TimerMode::Once)))
+            .insert(PlayingAttackAnimation(ATTACK_ANIMATION_DURATION.to_timer()))
+            .insert(TweenTarget)
+
+            .animation()
+            .insert(tween::sequence((
+                DO(
+                    0.05.to_seconds(),
+                    EaseKind::Linear,
+                    transform.translation_by(offset),
+                ),
+                DO(
+                    0.2.to_seconds(),
+                    EaseKind::Linear,
+                    transform.translation_by(-offset),
+                ),
+            )))
         ;
+    }
+}
+
+pub fn end_attack_animation(
+    mut commands: Commands,
+    mut units: Query<(Entity, &mut PlayingAttackAnimation)>,
+    time: Res<Time>,
+) {
+    for (unit, mut animation) in units.iter_mut() {
+        let timer = &mut animation.0;
+        timer.tick(time.delta());
+
+        if timer.just_finished() {
+            commands.entity(unit)
+                .remove::<PlayingAttackAnimation>()
+            ;
+        }
     }
 }
