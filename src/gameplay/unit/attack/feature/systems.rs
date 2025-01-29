@@ -59,8 +59,7 @@ pub fn create_attack_affect(
     attackers: Query<(Entity, &Opponent, &Damage,)>,
 ) {
     for AttackCharged(attacker) in events.read() {
-        let (attacker, opponent, damage) = attackers.get(*attacker)
-            .expect("Entity missed necessary components");
+        let (attacker, opponent, damage) = cq!(attackers.get(*attacker));
 
         commands.queue(CreateAffect {
             affect_type: AffectType::DealDamage,
