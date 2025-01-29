@@ -1,3 +1,7 @@
+# v0.0.19
+- unit's attack:
+  - [logic](https://github.com/rapushka/deck_scaler_rts/pull/15)
+
 # v0.0.18
 - [auto-attack](https://github.com/rapushka/deck_scaler_rts/pull/7)
 - [units selection](https://github.com/rapushka/deck_scaler_rts/pull/4)
