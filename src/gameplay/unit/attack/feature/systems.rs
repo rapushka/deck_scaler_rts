@@ -1,5 +1,6 @@
 use std::time::Duration;
-use crate::gameplay::unit::attack::{AttackChargeDuration, ChargingAttack, Range};
+use crate::gameplay::affect::{Affect, AffectType, CreateAffect};
+use crate::gameplay::unit::attack::{AttackCharged, AttackChargeDuration, ChargingAttack, Range, Damage};
 use crate::gameplay::unit::opponent::Opponent;
 use crate::prelude::*;
 
@@ -37,14 +38,35 @@ pub fn tick_charging_attacks(
 pub fn on_attack_charged(
     mut commands: Commands,
     attackers: Query<(Entity, &ChargingAttack)>,
+    mut events: EventWriter<AttackCharged>,
 ) {
     for (attacker, timer) in attackers.iter() {
         if !timer.0.finished() {
             continue;
         }
 
+        events.send(AttackCharged(attacker));
+
         commands.entity(attacker)
             .remove::<ChargingAttack>()
         ;
+    }
+}
+
+pub fn create_attack_affect(
+    mut commands: Commands,
+    mut events: EventReader<AttackCharged>,
+    attackers: Query<(Entity, &Opponent, &Damage,)>,
+) {
+    for AttackCharged(attacker) in events.read() {
+        let (attacker, opponent, damage) = attackers.get(*attacker)
+            .expect("Entity missed necessary components");
+
+        commands.queue(CreateAffect {
+            affect_type: AffectType::DealDamage,
+            value: damage.0,
+            sender: attacker,
+            target: opponent.0,
+        });
     }
 }

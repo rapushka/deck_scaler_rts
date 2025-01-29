@@ -1,6 +1,6 @@
-use crate::gameplay::unit::attack::{AttackChargeDuration, Range};
-use crate::gameplay::unit::health::MaxHealth;
-use crate::gameplay::unit::stats::{BaseStats, MovementSpeed, Stat, StatsModifiers};
+use crate::gameplay::unit::attack::*;
+use crate::gameplay::unit::health::*;
+use crate::gameplay::unit::stats::*;
 use crate::prelude::*;
 
 pub fn update_stats(
@@ -17,6 +17,7 @@ pub fn update_stats(
             .insert(Range(calculate(Stat::Range)))
             .insert(AttackChargeDuration(calculate(Stat::AttackChargeDuration)))
             .insert(MaxHealth(calculate(Stat::MaxHealth)))
+            .insert(Damage(calculate(Stat::Damage)))
         ;
     }
 }
