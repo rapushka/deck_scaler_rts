@@ -7,7 +7,7 @@ pub use selection::*;
 use crate::gameplay::unit::attack::AttackPlugin;
 use behaviour_state::auto_mode::*;
 use crate::gameplay::unit::behaviour_state::UnitBehaviourPlugin;
-use crate::gameplay::unit::health::HealthPlugin;
+pub use crate::gameplay::unit::health::*;
 use crate::gameplay::unit::opponent::*;
 use crate::gameplay::unit::side::*;
 

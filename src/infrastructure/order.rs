@@ -8,6 +8,8 @@ pub enum Order {
     GameLogic,
     Postprocess,
 
+    ApplyAffects,
+
     View,
 
     Cleanups,

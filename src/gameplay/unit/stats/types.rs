@@ -11,6 +11,7 @@ pub enum Stat {
     Range,
     AttackChargeDuration,
     MaxHealth,
+    Damage,
 }
 
 pub struct StatProps<T> {
@@ -18,6 +19,7 @@ pub struct StatProps<T> {
     pub range: T,
     pub attack_charge_duration: T,
     pub max_health: T,
+    pub damage: T,
 }
 
 impl<T: Default> Default for StatProps<T> {
@@ -27,6 +29,7 @@ impl<T: Default> Default for StatProps<T> {
             range: T::default(),
             attack_charge_duration: T::default(),
             max_health: T::default(),
+            damage: T::default(),
         }
     }
 }
@@ -45,6 +48,7 @@ impl<T: Default> StatsMap<T> {
         stats.insert(Stat::Range, props.range);
         stats.insert(Stat::AttackChargeDuration, props.attack_charge_duration);
         stats.insert(Stat::MaxHealth, props.max_health);
+        stats.insert(Stat::Damage, props.damage);
 
         StatsMap(stats)
     }

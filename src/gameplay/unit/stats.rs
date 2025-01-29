@@ -1,10 +1,10 @@
 use crate::prelude::*;
 pub use feature::*;
-pub use structs::*;
+pub use types::*;
 
 mod feature;
 
-mod structs;
+mod types;
 
 pub struct StatsPlugin;
 
