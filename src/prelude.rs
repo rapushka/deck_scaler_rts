@@ -7,6 +7,7 @@ pub use tiny_bail::prelude::*;
 pub use crate::infrastructure::app_state::*;
 pub use crate::infrastructure::order::*;
 pub use crate::gameplay::unit::*;
+pub use crate::gameplay::affect::*;
 pub use crate::common::*;
 
 pub use std::format as f;
