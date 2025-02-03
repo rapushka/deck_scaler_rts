@@ -1,3 +1,7 @@
+# v0.0.20
+- unit's attack:
+  - [view](https://github.com/rapushka/deck_scaler_rts/pull/17)
+
 # v0.0.19
 - unit's attack:
   - [logic](https://github.com/rapushka/deck_scaler_rts/pull/15)
