@@ -15,6 +15,7 @@ mod assets;
 mod infrastructure;
 mod common;
 mod input;
+mod utils;
 
 fn main() {
     App::new()

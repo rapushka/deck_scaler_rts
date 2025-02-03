@@ -1,5 +1,5 @@
 use crate::assets::UnitAssets;
-use crate::gameplay::unit::view::{LoadingView, UnitInfoContainer};
+use crate::gameplay::unit::view::{LoadingView, UnitInfoContainer, UnitHeadView};
 use crate::prelude::*;
 use bevy::prelude::{Entity, Query, With};
 
@@ -12,17 +12,22 @@ pub fn load_unit_view(
         let info_container = commands.spawn(Name::from("info"))
             .insert(Transform::from_translation(Vec3 { x: 0.0, y: -55.0, z: 10.0 }))
             .insert(Visibility::default())
-            .set_parent(unit)
             .id();
 
-        let sprite = match unit_id {
-            UnitID::Crook => assets.crook.clone(),
-            UnitID::Rat => assets.rat.clone(),
-        };
+        let head = commands.spawn(Name::from("head"))
+            .insert(Transform::default())
+            .insert(Visibility::default())
+            .insert(Sprite::from_image(assets.get_head(unit_id)))
+            .id();
 
         commands.entity(unit)
-            .insert(Sprite::from_image(sprite))
+            .insert(Visibility::default())
+
+            .add_child(info_container)
             .insert(UnitInfoContainer(info_container))
+
+            .add_child(head)
+            .insert(UnitHeadView(head))
 
             .remove::<LoadingView>()
         ;

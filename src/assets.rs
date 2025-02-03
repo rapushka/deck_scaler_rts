@@ -23,3 +23,12 @@ pub struct UnitAssets {
     #[asset(path = "unit/rat_head_small.png")]
     pub rat: Handle<Image>,
 }
+
+impl UnitAssets {
+    pub fn get_head(&self, unit_id: &UnitID) -> Handle<Image> {
+        match unit_id {
+            UnitID::Crook => self.crook.clone(),
+            UnitID::Rat => self.rat.clone(),
+        }
+    }
+}
