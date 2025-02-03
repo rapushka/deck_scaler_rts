@@ -6,7 +6,7 @@ use crate::gameplay::unit::view::attack_animation::*;
 
 mod feature;
 
-mod attack_animation;
+pub mod attack_animation;
 
 pub struct UnitViewPlugin;
 

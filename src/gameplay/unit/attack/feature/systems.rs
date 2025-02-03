@@ -2,11 +2,12 @@ use std::time::Duration;
 use crate::gameplay::affect::{Affect, AffectType, CreateAffect};
 use crate::gameplay::unit::attack::{AttackCharged, AttackChargeDuration, ChargingAttack, Range, Damage};
 use crate::gameplay::unit::opponent::Opponent;
+use crate::gameplay::unit::view::attack_animation::PlayingAttackAnimation;
 use crate::prelude::*;
 
 pub fn start_attack_charging(
     mut commands: Commands,
-    attackers: Query<(Entity, &Opponent, &Range, &AttackChargeDuration), (With<UnitID>, Without<ChargingAttack>)>,
+    attackers: Query<(Entity, &Opponent, &Range, &AttackChargeDuration), (With<UnitID>, Without<ChargingAttack>, Without<PlayingAttackAnimation>)>,
     transforms: Query<&Transform>,
 ) {
     for (attacker, opponent, range, charge_duration) in attackers.iter() {
