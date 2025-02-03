@@ -11,17 +11,19 @@ pub fn play_attack_animation(
     mut events: EventReader<AttackCharged>,
     units: Query<(Entity, &UnitHeadView, &Opponent), Without<PlayingAttackAnimation>>, // TODO: blacklist PlayingAttackAnimation in other places
     transforms: Query<&Transform>,
+    global_transforms: Query<&GlobalTransform>,
 ) {
     for AttackCharged(attacker) in events.read() {
         let (unit, UnitHeadView(head), Opponent(opponent)) = cq!(units.get(*attacker));
         let transform = cq!(transforms.get(*head));
-        let opponent_position = cq!(transforms.get(*opponent)).translation;
-        let initial_position = transform.translation;
 
         let target = head.into_target();
         let mut transform = target.transform_state(*transform);
 
-        let offset = Vec3::Y * 10.0;
+        let attacker_world_position = cq!(global_transforms.get(*head)).translation();
+        let target_world_position = cq!(global_transforms.get(*opponent)).translation();
+        let direction = (target_world_position - attacker_world_position).normalize();
+        let offset = direction * 25.0;
         commands.entity(unit)
             .insert(PlayingAttackAnimation(ATTACK_ANIMATION_DURATION.to_timer()))
             .insert(TweenTarget)
@@ -30,12 +32,12 @@ pub fn play_attack_animation(
             .insert(tween::sequence((
                 DO(
                     0.05.to_seconds(),
-                    EaseKind::Linear,
+                    EaseKind::BackOut,
                     transform.translation_by(offset),
                 ),
                 DO(
                     0.2.to_seconds(),
-                    EaseKind::Linear,
+                    EaseKind::BackOut,
                     transform.translation_by(-offset),
                 ),
             )))
