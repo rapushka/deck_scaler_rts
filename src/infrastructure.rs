@@ -10,6 +10,7 @@ impl Plugin for InfrastructurePlugin {
         app
             .configure_sets(Update, (
                 Order::Input,
+                Order::UnitOrders,
                 Order::Preprocess,
                 Order::GameLogic,
                 Order::Postprocess,

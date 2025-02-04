@@ -1,9 +1,9 @@
-use crate::gameplay::unit::selection::feature::SelectedUnit;
 use crate::prelude::*;
-use crate::prelude::selection::feature::*;
-use crate::prelude::selection::view::SelectionViewPlugin;
 
-pub mod feature;
+pub use feature::*;
+use view::*;
+
+mod feature;
 
 mod view;
 

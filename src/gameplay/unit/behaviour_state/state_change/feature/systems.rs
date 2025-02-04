@@ -2,7 +2,6 @@ use crate::gameplay::unit::behaviour_state::auto_mode::AutoAttackState;
 use crate::gameplay::unit::opponent::Opponent;
 use crate::input::{SetAutoUnitStateRequest, SetManualUnitStateRequest};
 use crate::prelude::*;
-use crate::prelude::selection::feature::SelectedUnit;
 
 pub fn change_selected_units_to_auto(
     mut commands: Commands,
@@ -17,6 +16,7 @@ pub fn change_selected_units_to_auto(
         }
     }
 }
+
 pub fn change_selected_units_to_manual(
     mut commands: Commands,
     selected_units: Query<Entity, (With<SelectedUnit>, With<AutoAttackState>)>,

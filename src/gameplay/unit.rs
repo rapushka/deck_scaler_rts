@@ -5,7 +5,6 @@ pub use feature::*;
 use stats::*;
 pub use selection::*;
 use crate::gameplay::unit::attack::AttackPlugin;
-use behaviour_state::auto_mode::*;
 use crate::gameplay::unit::behaviour_state::UnitBehaviourPlugin;
 pub use crate::gameplay::unit::health::*;
 use crate::gameplay::unit::opponent::*;
@@ -40,10 +39,15 @@ impl Plugin for UnitPlugin {
 
             .add_systems(OnEnter(AppState::Gameplay), test_require_spawn_unit)
 
-            .add_systems(Update, (
-                spawn_unit,
-                order_target_position,
-            ).run_if(in_state(AppState::Gameplay)).in_set(Order::GameLogic))
+            .add_systems(Update, spawn_unit
+                .run_if(in_state(AppState::Gameplay))
+                .in_set(Order::GameLogic),
+            )
+
+            .add_systems(Update, order_target_position
+                .run_if(in_state(AppState::Gameplay))
+                .in_set(Order::UnitOrders),
+            )
         ;
     }
 }

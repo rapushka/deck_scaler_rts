@@ -10,6 +10,7 @@ pub use bevy_tween::prelude::*;
 pub use crate::infrastructure::app_state::*;
 pub use crate::infrastructure::order::*;
 pub use crate::gameplay::unit::*;
+pub use crate::gameplay::unit::selection::*;
 pub use crate::gameplay::affect::*;
 pub use crate::common::*;
 pub use crate::utils::*;

@@ -2,8 +2,7 @@ use crate::gameplay::unit::health::Health;
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
-use crate::input::{CursorPosition, JustClickedOrder, PlayerInput};
-use crate::prelude::selection::feature::SelectedUnit;
+use crate::input::{CursorPosition, JustClickedOrder, PlayerInput, SetManualUnitStateRequest};
 use crate::prelude::*;
 use crate::gameplay::unit::behaviour_state::auto_mode::AutoAttackState;
 
@@ -74,12 +73,15 @@ pub fn order_target_position(
     mut commands: Commands,
     units: Query<Entity, (With<UnitID>, With<SelectedUnit>)>,
     cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedOrder>)>,
+    mut event: EventWriter<SetManualUnitStateRequest>,
 ) {
     for unit in units.iter() {
         for cursor_position in cursors.iter() {
             commands.entity(unit)
                 .insert(TargetPosition(cursor_position.0))
             ;
+
+            event.send(SetManualUnitStateRequest);
         }
     }
 }

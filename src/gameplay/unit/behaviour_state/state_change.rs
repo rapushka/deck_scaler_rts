@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-use feature::*;
+pub use feature::*;
 
 mod feature;
 
@@ -12,7 +12,7 @@ impl Plugin for UnitStateChangePlugin {
             .add_systems(Update, (
                 change_selected_units_to_manual,
                 change_selected_units_to_auto,
-            ).in_set(Order::Preprocess))
+            ).after(Order::UnitOrders))
         ;
     }
 }
