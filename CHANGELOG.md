@@ -1,4 +1,5 @@
 # v0.0.20
+- [automatically change unit's mode to manual, on order-click](https://github.com/rapushka/deck_scaler_rts/pull/19)
 - unit's attack:
   - [view](https://github.com/rapushka/deck_scaler_rts/pull/17)
 
