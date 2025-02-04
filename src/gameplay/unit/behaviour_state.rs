@@ -3,7 +3,7 @@ use crate::prelude::*;
 use state_change::*;
 
 pub mod auto_mode;
-mod state_change;
+pub mod state_change;
 
 pub struct UnitBehaviourPlugin;
 

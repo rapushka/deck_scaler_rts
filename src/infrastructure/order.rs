@@ -4,6 +4,8 @@ use crate::prelude::*;
 pub enum Order {
     Input,
 
+    UnitOrders,
+
     Preprocess,
     GameLogic,
     Postprocess,
