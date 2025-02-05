@@ -6,6 +6,6 @@ pub fn destroy_affects(
     affects: Query<Entity, With<Affect>>,
 ) {
     for affect in affects.iter() {
-        commands.entity(affect).despawn();
+        commands.entity(affect).despawn_recursive();
     }
 }
