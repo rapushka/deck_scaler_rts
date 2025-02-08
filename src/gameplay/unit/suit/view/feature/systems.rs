@@ -17,6 +17,11 @@ pub fn spawn_suit_view(
                 image,
                 ..default()
             })
+            .insert(Transform {
+                translation: Vec3::new(-45.0, 5.0, 10.0),
+                scale: Vec3::new(0.25, 0.25, 1.0),
+                ..default()
+            })
             .id();
 
         commands.entity(entity)
