@@ -15,7 +15,9 @@ impl Plugin for UnitViewPlugin {
         app
             .add_plugins(UnitAttackAnimationPlugin)
 
-            .add_systems(Update, load_unit_view.run_if(in_state(AppState::Gameplay)))
+            .add_systems(Update, load_unit_view
+                .in_set(Order::View)
+                .run_if(in_state(AppState::Gameplay)))
         ;
     }
 }

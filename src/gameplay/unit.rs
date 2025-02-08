@@ -9,7 +9,7 @@ use behaviour_state::UnitBehaviourPlugin;
 pub use health::*;
 use opponent::*;
 use side::*;
-use suit::*;
+pub use suit::*;
 
 mod feature;
 
