@@ -1,14 +1,15 @@
 use crate::prelude::*;
 
-use crate::gameplay::unit::view::*;
+use view::*;
 pub use feature::*;
 use stats::*;
 pub use selection::*;
-use crate::gameplay::unit::attack::AttackPlugin;
-use crate::gameplay::unit::behaviour_state::UnitBehaviourPlugin;
-pub use crate::gameplay::unit::health::*;
-use crate::gameplay::unit::opponent::*;
-use crate::gameplay::unit::side::*;
+use attack::AttackPlugin;
+use behaviour_state::UnitBehaviourPlugin;
+pub use health::*;
+use opponent::*;
+use side::*;
+use suit::*;
 
 mod feature;
 
@@ -20,6 +21,7 @@ mod opponent;
 mod behaviour_state;
 mod attack;
 mod health;
+mod suit;
 
 pub struct UnitPlugin;
 
@@ -34,6 +36,7 @@ impl Plugin for UnitPlugin {
             .add_plugins(UnitBehaviourPlugin)
             .add_plugins(AttackPlugin)
             .add_plugins(HealthPlugin)
+            .add_plugins(SuitsPlugin)
 
             .add_event::<SpawnUnit>()
 
