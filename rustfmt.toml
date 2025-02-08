@@ -1,0 +1,10 @@
+chain_style = "new_line"
+disable_all_formatting = true
+edition = "2021"
+fn_params_layout = "Vertical"
+match_block_trailing_comma = true
+overflow_delimited_expr = true
+reorder_impl_items = true
+reorder_imports = true
+reorder_modules = false
+group_imports = "StdExternalCrate"

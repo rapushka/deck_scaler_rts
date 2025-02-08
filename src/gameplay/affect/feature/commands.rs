@@ -1,5 +1,4 @@
 use crate::gameplay::affect::deal_damage::DealDamage;
-use crate::gameplay::affect::feature::*;
 use crate::gameplay::affect::types::AffectType;
 use crate::prelude::*;
 
