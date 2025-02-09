@@ -29,4 +29,8 @@ impl StatsModifiers {
         *self.0.0.get(stat)
             .unwrap_or_else(|| panic!("{stat:?} stat is missing!"))
     }
+
+    pub fn set(&mut self, stat: Stat, modifier: Modifier) {
+        self.0.0.insert(stat, modifier);
+    }
 }

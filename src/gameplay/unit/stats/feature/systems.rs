@@ -1,14 +1,12 @@
 use crate::gameplay::unit::attack::*;
-use crate::gameplay::unit::health::*;
 use crate::gameplay::unit::stats::*;
-use crate::prelude::*;
 
 pub fn update_stats(
     mut commands: Commands,
     entities: Query<(Entity, &BaseStats, &StatsModifiers)>,
 ) {
     for (entity, base_stats, modifiers) in entities.iter() {
-        let calculate = |stat: Stat| -> f32{
+        let calculate = |stat: Stat| -> f32 {
             modifiers.get(&stat).modify(base_stats.get(&stat))
         };
 
@@ -19,6 +17,8 @@ pub fn update_stats(
             .insert(Attack(calculate(Stat::Attack)))
             .insert(Defense(calculate(Stat::Defense)))
             .insert(MaxHealth(calculate(Stat::MaxHealth)))
+            .insert(SparkleCapacity(calculate(Stat::SparkleCapacity)))
+            .insert(SparkleChargeRate(calculate(Stat::SparkleChargeRate)))
         ;
     }
 }
