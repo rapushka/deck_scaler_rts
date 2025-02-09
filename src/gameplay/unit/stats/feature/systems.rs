@@ -17,7 +17,8 @@ pub fn update_stats(
             .insert(Attack(calculate(Stat::Attack)))
             .insert(Defense(calculate(Stat::Defense)))
             .insert(MaxHealth(calculate(Stat::MaxHealth)))
-            .insert(SparkleChargeDuration(calculate(Stat::SparkleChargeDuration)))
+            .insert(SparkleCapacity(calculate(Stat::SparkleCapacity)))
+            .insert(SparkleChargeRate(calculate(Stat::SparkleChargeRate)))
         ;
     }
 }
