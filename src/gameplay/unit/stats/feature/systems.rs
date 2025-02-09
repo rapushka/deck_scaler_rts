@@ -17,7 +17,7 @@ pub fn update_stats(
             .insert(Range(calculate(Stat::Range)))
             .insert(AttackChargeDuration(calculate(Stat::AttackChargeDuration)))
             .insert(MaxHealth(calculate(Stat::MaxHealth)))
-            .insert(Damage(calculate(Stat::Damage)))
+            .insert(Damage(calculate(Stat::Attack)))
         ;
     }
 }
