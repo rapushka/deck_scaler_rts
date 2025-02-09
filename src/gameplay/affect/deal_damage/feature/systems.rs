@@ -7,6 +7,8 @@ pub fn apply_deal_damage_affect(
 ) {
     for (value, target) in affects.iter() {
         let mut target_health = cq!(healths.get_mut(target.0));
-        target_health.0 -= value.0;
+        let damage = value.0.clamp_min(0.0);
+
+        target_health.0 -= damage;
     }
 }

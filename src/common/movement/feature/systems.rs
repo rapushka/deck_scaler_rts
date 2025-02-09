@@ -3,7 +3,7 @@ use crate::prelude::*;
 pub fn move_to_target(
     mut commands: Commands,
     mut entities: Query<(Entity, &mut Transform, &TargetPosition, &MovementSpeed)>,
-    time: Res<Time>,
+    time: Res<Time<Virtual>>,
 ) {
     for (entity, mut transform, target, speed) in entities.iter_mut() {
         let position = &mut transform.translation;

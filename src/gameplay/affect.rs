@@ -1,18 +1,24 @@
 use crate::prelude::*;
 pub use feature::*;
 pub use types::*;
-use crate::gameplay::affect::deal_damage::apply_deal_damage_affect;
+use deal_damage::*;
+use block_damage::*;
 
 mod feature;
 mod types;
 
 pub mod deal_damage;
+pub mod block_damage;
 
 pub struct AffectPlugin;
 
 impl Plugin for AffectPlugin {
     fn build(&self, app: &mut App) {
         app
+            .add_systems(Update, (
+                block_damage,
+            ).in_set(Order::InfluenceAffects))
+
             .add_systems(Update, (
                 apply_deal_damage_affect,
             ).in_set(Order::ApplyAffects))

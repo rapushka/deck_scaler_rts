@@ -13,7 +13,11 @@ impl Plugin for InfrastructurePlugin {
                 Order::UnitOrders,
                 Order::Preprocess,
                 Order::GameLogic,
+                Order::ChargeAttack,
+                Order::CreateAffects,
                 Order::Postprocess,
+                Order::InfluenceAffects,
+                Order::ApplyAffects,
                 Order::View,
                 Order::Cleanups,
             ).chain())
