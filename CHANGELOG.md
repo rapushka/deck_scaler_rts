@@ -3,6 +3,7 @@
 - [unit's attack view](https://github.com/rapushka/deck_scaler_rts/pull/17)
 - [suits](https://github.com/rapushka/deck_scaler_rts/pull/23)
 - [unit's defense stat](https://github.com/rapushka/deck_scaler_rts/pull/25)
+- [sparkle mechanic](https://github.com/rapushka/deck_scaler_rts/pull/27)
 
 # v0.0.19
 - unit's attack:
