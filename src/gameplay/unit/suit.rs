@@ -14,6 +14,8 @@ impl Plugin for SuitsPlugin {
             .add_plugins(SuitViewPlugin)
 
             .register_type::<Suit>()
+
+            .add_systems(Update, assign_suit_component)
         ;
     }
 }

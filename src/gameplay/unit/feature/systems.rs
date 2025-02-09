@@ -47,7 +47,6 @@ pub fn spawn_unit(
             .insert(*side)
             .insert(AutoAttackState)
             .insert(Health(health))
-            .insert(get_suit(id))
         ;
     }
 }
@@ -61,22 +60,19 @@ fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
             attack: 5.0,
             defense: 1.0,
             max_health: 20.0,
+            sparkle: 1.0,
+            sparkle_charge_duration: 5.0,
         },
         UnitID::Rat => StatProps {
             movement_speed: 150.0,
             range: 75.0,
             attack_charge_duration: 1.5,
             attack: 2.0,
-            defense: 0.0,
+            defense: 1.0,
             max_health: 5.0,
+            sparkle: 1.0,
+            sparkle_charge_duration: 10.0,
         },
-    }
-}
-
-fn get_suit(unit_id: UnitID) -> Suit {
-    match unit_id {
-        UnitID::Crook => Suit::Spades,
-        UnitID::Rat => Suit::Clubs,
     }
 }
 

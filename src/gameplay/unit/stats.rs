@@ -16,7 +16,7 @@ impl Plugin for StatsPlugin {
 
             .add_systems(Update, (
                 update_stats,
-            ).in_set(Order::Preprocess))
+            ).in_set(Order::UpdateStats))
         ;
     }
 }

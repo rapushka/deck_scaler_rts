@@ -7,6 +7,7 @@ pub enum Order {
     UnitOrders,
 
     Preprocess,
+    UpdateStats,
     GameLogic,
 
     ChargeAttack,
