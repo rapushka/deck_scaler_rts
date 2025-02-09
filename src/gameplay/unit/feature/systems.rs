@@ -2,6 +2,7 @@ use crate::gameplay::unit::behaviour_state::auto_mode::AutoAttackState;
 use crate::gameplay::unit::health::Health;
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
+use crate::gameplay::unit::suit::Suit;
 use crate::gameplay::unit::view::LoadingView;
 use crate::input::{CursorPosition, JustClickedOrder, PlayerInput, SetManualUnitStateRequest};
 use crate::prelude::*;
@@ -46,6 +47,7 @@ pub fn spawn_unit(
             .insert(*side)
             .insert(AutoAttackState)
             .insert(Health(health))
+            .insert(get_suit(id))
         ;
     }
 }
@@ -66,6 +68,13 @@ fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
             max_health: 5.0,
             damage: 1.0,
         },
+    }
+}
+
+fn get_suit(unit_id: UnitID) -> Suit {
+    match unit_id {
+        UnitID::Crook => Suit::Spades,
+        UnitID::Rat => Suit::Clubs,
     }
 }
 

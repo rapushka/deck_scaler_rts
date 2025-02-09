@@ -9,6 +9,7 @@ impl Plugin for AssetsPlugin {
             .add_loading_state(
                 LoadingState::new(AppState::Bootstrap)
                     .load_collection::<UnitAssets>()
+                    .load_collection::<SuitAssets>()
                     .continue_to_state(AppState::Gameplay)
             )
         ;
@@ -29,6 +30,32 @@ impl UnitAssets {
         match unit_id {
             UnitID::Crook => self.crook.clone(),
             UnitID::Rat => self.rat.clone(),
+        }
+    }
+}
+
+#[derive(AssetCollection, Resource)]
+pub struct SuitAssets {
+    #[asset(path = "suits/clubs.png")]
+    pub clubs: Handle<Image>,
+
+    #[asset(path = "suits/diamonds.png")]
+    pub diamonds: Handle<Image>,
+
+    #[asset(path = "suits/hearts.png")]
+    pub hearts: Handle<Image>,
+
+    #[asset(path = "suits/spades.png")]
+    pub spades: Handle<Image>,
+}
+
+impl SuitAssets {
+    pub fn get_sprite(&self, suit: &Suit) -> Handle<Image> {
+        match suit {
+            Suit::Spades => self.spades.clone(),
+            Suit::Hearts => self.hearts.clone(),
+            Suit::Clubs => self.clubs.clone(),
+            Suit::Diamonds => self.diamonds.clone(),
         }
     }
 }
