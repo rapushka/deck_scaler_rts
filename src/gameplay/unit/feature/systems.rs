@@ -47,6 +47,7 @@ pub fn spawn_unit(
             .insert(*side)
             .insert(AutoAttackState)
             .insert(Health(health))
+            .insert(Sparkle(1.0))
         ;
     }
 }
@@ -60,7 +61,6 @@ fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
             attack: 5.0,
             defense: 1.0,
             max_health: 20.0,
-            sparkle: 1.0,
             sparkle_charge_duration: 5.0,
         },
         UnitID::Rat => StatProps {
@@ -70,7 +70,6 @@ fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
             attack: 2.0,
             defense: 1.0,
             max_health: 5.0,
-            sparkle: 1.0,
             sparkle_charge_duration: 10.0,
         },
     }

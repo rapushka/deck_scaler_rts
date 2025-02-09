@@ -13,7 +13,6 @@ pub enum Stat {
     Attack,
     Defense,
     MaxHealth,
-    Sparkle,
     SparkleChargeDuration,
 }
 
@@ -24,7 +23,6 @@ pub struct StatProps<T> {
     pub attack: T,
     pub defense: T,
     pub max_health: T,
-    pub sparkle: T,
     pub sparkle_charge_duration: T,
 }
 
@@ -37,7 +35,6 @@ impl<T: Default> Default for StatProps<T> {
             attack: T::default(),
             defense: T::default(),
             max_health: T::default(),
-            sparkle: T::default(),
             sparkle_charge_duration: T::default(),
         }
     }
@@ -59,7 +56,6 @@ impl<T: Default> StatsMap<T> {
         stats.insert(Stat::Attack, props.attack);
         stats.insert(Stat::Defense, props.defense);
         stats.insert(Stat::MaxHealth, props.max_health);
-        stats.insert(Stat::Sparkle, props.sparkle);
         stats.insert(Stat::SparkleChargeDuration, props.sparkle_charge_duration);
 
         StatsMap(stats)
