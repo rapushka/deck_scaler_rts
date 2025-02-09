@@ -54,7 +54,7 @@ pub fn play_attack_animation(
 pub fn end_attack_animation(
     mut commands: Commands,
     mut units: Query<(Entity, &mut PlayingAttackAnimation, &AttackAnimator)>,
-    time: Res<Time>,
+    time: Res<Time<Virtual>>,
 ) {
     for (unit, mut animation, AttackAnimator(animator)) in units.iter_mut() {
         let timer = &mut animation.0;

@@ -9,7 +9,7 @@ pub struct Range(pub f32);
 pub struct AttackChargeDuration(pub f32);
 
 #[derive(Component)]
-pub struct Damage(pub f32);
+pub struct Attack(pub f32);
 
 // states
 

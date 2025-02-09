@@ -1,6 +1,6 @@
 use std::time::Duration;
 use crate::gameplay::affect::{AffectType, CreateAffect};
-use crate::gameplay::unit::attack::{AttackCharged, AttackChargeDuration, ChargingAttack, Range, Damage};
+use crate::gameplay::unit::attack::*;
 use crate::gameplay::unit::opponent::Opponent;
 use crate::gameplay::unit::view::attack_animation::PlayingAttackAnimation;
 use crate::prelude::*;
@@ -29,7 +29,7 @@ pub fn start_attack_charging(
 
 pub fn tick_charging_attacks(
     mut attackers: Query<&mut ChargingAttack>,
-    time: Res<Time>,
+    time: Res<Time<Virtual>>,
 ) {
     for mut timer in attackers.iter_mut() {
         timer.0.tick(time.delta());
@@ -57,7 +57,7 @@ pub fn on_attack_charged(
 pub fn create_attack_affect(
     mut commands: Commands,
     mut events: EventReader<AttackCharged>,
-    attackers: Query<(Entity, &Opponent, &Damage,)>,
+    attackers: Query<(Entity, &Opponent, &Attack)>,
 ) {
     for AttackCharged(attacker) in events.read() {
         let (attacker, opponent, damage) = cq!(attackers.get(*attacker));

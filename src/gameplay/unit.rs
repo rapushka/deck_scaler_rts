@@ -10,6 +10,7 @@ pub use health::*;
 use opponent::*;
 use side::*;
 pub use suit::*;
+pub use defense::*;
 
 mod feature;
 
@@ -20,6 +21,7 @@ mod side;
 mod opponent;
 mod behaviour_state;
 mod attack;
+mod defense;
 mod health;
 mod suit;
 
@@ -35,6 +37,7 @@ impl Plugin for UnitPlugin {
             .add_plugins(OpponentPlugin)
             .add_plugins(UnitBehaviourPlugin)
             .add_plugins(AttackPlugin)
+            .add_plugins(DefensePlugin)
             .add_plugins(HealthPlugin)
             .add_plugins(SuitsPlugin)
 

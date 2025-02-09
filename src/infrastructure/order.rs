@@ -8,7 +8,12 @@ pub enum Order {
 
     Preprocess,
     GameLogic,
+
+    ChargeAttack,
+    CreateAffects,
+
     Postprocess,
+    InfluenceAffects,
 
     ApplyAffects,
 

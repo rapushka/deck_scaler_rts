@@ -15,9 +15,10 @@ impl Plugin for AttackPlugin {
                 start_attack_charging,
                 tick_charging_attacks,
                 on_attack_charged,
-                create_attack_affect,
             ).chain()
-                .in_set(Order::GameLogic))
+                .in_set(Order::ChargeAttack))
+
+            .add_systems(Update, create_attack_affect.in_set(Order::CreateAffects))
         ;
     }
 }

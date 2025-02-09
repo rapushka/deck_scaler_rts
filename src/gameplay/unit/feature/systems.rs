@@ -58,15 +58,17 @@ fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
             movement_speed: 100.0,
             range: 150.0,
             attack_charge_duration: 1.0,
+            attack: 5.0,
+            defense: 1.0,
             max_health: 20.0,
-            damage: 5.0,
         },
         UnitID::Rat => StatProps {
             movement_speed: 150.0,
             range: 75.0,
             attack_charge_duration: 1.5,
+            attack: 2.0,
+            defense: 0.0,
             max_health: 5.0,
-            damage: 1.0,
         },
     }
 }

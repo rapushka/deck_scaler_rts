@@ -16,8 +16,9 @@ pub fn update_stats(
             .insert(MovementSpeed(calculate(Stat::MovementSpeed)))
             .insert(Range(calculate(Stat::Range)))
             .insert(AttackChargeDuration(calculate(Stat::AttackChargeDuration)))
+            .insert(Attack(calculate(Stat::Attack)))
+            .insert(Defense(calculate(Stat::Defense)))
             .insert(MaxHealth(calculate(Stat::MaxHealth)))
-            .insert(Damage(calculate(Stat::Damage)))
         ;
     }
 }
