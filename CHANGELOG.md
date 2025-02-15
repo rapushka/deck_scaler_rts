@@ -2,6 +2,7 @@
 - [move camera & always ensure selection](https://github.com/rapushka/deck_scaler_rts/pull/29)
 - [spawn the "level" (just a gray rectangle in fact)](https://github.com/rapushka/deck_scaler_rts/pull/31)
 - [move camera by mousewheel](https://github.com/rapushka/deck_scaler_rts/pull/33)
+- [view for unit move order](https://github.com/rapushka/deck_scaler_rts/pull/35)
 
 # v0.0.20
 - [automatically change unit's mode to manual, on order-click](https://github.com/rapushka/deck_scaler_rts/pull/19)
