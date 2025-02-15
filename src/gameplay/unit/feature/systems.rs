@@ -1,9 +1,10 @@
 use crate::gameplay::unit::behaviour_state::auto_mode::AutoAttackState;
 use crate::gameplay::unit::health::Health;
+use crate::gameplay::unit::lead::Lead;
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
-use crate::input::{CursorPosition, JustClickedOrder, PlayerInput, SetManualUnitStateRequest};
+use crate::input::*;
 use crate::prelude::*;
 
 pub fn test_require_spawn_unit(
@@ -13,17 +14,14 @@ pub fn test_require_spawn_unit(
         id: UnitID::Crook,
         position: Vec2::new(0.0, -200.0),
         side: Side::Player,
-    });
-    events.send(SpawnUnit {
-        id: UnitID::Crook,
-        position: Vec2::new(-150.0, -200.0),
-        side: Side::Player,
+        is_lead: true,
     });
 
     events.send(SpawnUnit {
-        id: UnitID::Rat,
-        position: Vec2::new(100.0, 200.0),
-        side: Side::Enemy,
+        id: UnitID::Crook,
+        position: Vec2::new(100.0, -200.0),
+        side: Side::Player,
+        is_lead: false,
     });
 }
 
@@ -31,12 +29,13 @@ pub fn spawn_unit(
     mut commands: Commands,
     mut events: EventReader<SpawnUnit>,
 ) {
-    for SpawnUnit { id, position, side } in events.read() {
+    for SpawnUnit { id, position, side, is_lead } in events.read() {
         let id = *id;
         let stat_props = get_base_stats(id);
         let health = stat_props.max_health;
 
-        commands.spawn(Name::from(f!("{id:?}")))
+        let mut command = commands.spawn(Name::from(f!("{id:?}")));
+        let unit = command
             .insert(id)
             .insert(LoadingView)
             .insert(BaseStats::new(stat_props))
@@ -48,7 +47,11 @@ pub fn spawn_unit(
             .insert(Health(health))
             .insert(Sparkle(1.0))
             .insert(NextSparkleCharge(0.0))
-        ;
+            ;
+
+        if *is_lead {
+            unit.insert(Lead);
+        }
     }
 }
 
@@ -74,22 +77,5 @@ fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
             sparkle_capacity: 10.0,
             sparkle_charge_rate: 1.0,
         },
-    }
-}
-
-pub fn order_target_position(
-    mut commands: Commands,
-    units: Query<Entity, (With<UnitID>, With<SelectedUnit>)>,
-    cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedOrder>)>,
-    mut event: EventWriter<SetManualUnitStateRequest>,
-) {
-    for unit in units.iter() {
-        for cursor_position in cursors.iter() {
-            commands.entity(unit)
-                .insert(TargetPosition(cursor_position.0))
-            ;
-
-            event.send(SetManualUnitStateRequest);
-        }
     }
 }

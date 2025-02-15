@@ -14,11 +14,14 @@ impl Plugin for UnitSelectionPlugin {
         app
             .add_plugins(SelectionViewPlugin)
 
+            .add_event::<MarkUnitSelected>()
+
             .add_systems(Update, (
-                deselect_current_units_on_new_selection,
-                mark_clicked_units_as_selected,
+                mark_units_selected,
+                deselect_old_units_on_new_selection,
+                select_units,
             ).chain()
-                .in_set(Order::Preprocess))
+                .in_set(Order::SelectUnits))
         ;
     }
 }

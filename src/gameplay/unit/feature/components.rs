@@ -12,4 +12,5 @@ pub struct SpawnUnit {
     pub id: UnitID,
     pub position: Vec2,
     pub side: Side,
+    pub is_lead: bool,
 }

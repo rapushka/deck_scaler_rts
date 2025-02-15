@@ -13,16 +13,14 @@ opt-level = 3
 # for Linux
 [target.x86_64-unknown-linux-gnu]
 linker = "clang"
-rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+rustflags = ["-C", "-Clink-arg=-fuse-ld=mold"]
 
 # for Windows
 [target.x86_64-pc-windows-msvc]
 linker = "rust-lld.exe"
 
 [features]
-dev = [
-    "bevy/dynamic_linking",
-]
+dev = ["bevy/dynamic_linking"]
 
 [dependencies]
 bevy = { version = "0.15" }

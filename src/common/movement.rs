@@ -12,7 +12,7 @@ impl Plugin for MovementPlugin {
         app
             .register_type::<TargetPosition>()
 
-            .add_systems(Update, move_to_target.in_set(Order::Postprocess))
+            .add_systems(Update, move_to_target.in_set(Order::MoveUnits))
         ;
     }
 }

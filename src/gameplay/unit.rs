@@ -12,6 +12,8 @@ use side::*;
 pub use suit::*;
 pub use defense::*;
 pub use sparkle::*;
+use lead::*;
+use crate::gameplay::unit::unit_orders::UnitOrdersPlugin;
 
 mod feature;
 
@@ -26,6 +28,8 @@ mod defense;
 mod health;
 mod suit;
 mod sparkle;
+mod lead;
+mod unit_orders;
 
 pub struct UnitPlugin;
 
@@ -43,6 +47,8 @@ impl Plugin for UnitPlugin {
             .add_plugins(HealthPlugin)
             .add_plugins(SuitsPlugin)
             .add_plugins(SparklePlugin)
+            .add_plugins(LeadPlugin)
+            .add_plugins(UnitOrdersPlugin)
 
             .add_event::<SpawnUnit>()
 
@@ -51,11 +57,6 @@ impl Plugin for UnitPlugin {
             .add_systems(Update, spawn_unit
                 .run_if(in_state(AppState::Gameplay))
                 .in_set(Order::GameLogic),
-            )
-
-            .add_systems(Update, order_target_position
-                .run_if(in_state(AppState::Gameplay))
-                .in_set(Order::UnitOrders),
             )
         ;
     }

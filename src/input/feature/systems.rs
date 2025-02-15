@@ -1,4 +1,5 @@
 use bevy::window::PrimaryWindow;
+use crate::input::movement::CameraMovementInput;
 use crate::input::{bindings, CursorPosition, JustClickedOrder, JustClickedSelect, PlayerInput};
 use crate::prelude::*;
 
@@ -8,6 +9,7 @@ pub fn init_input(
     commands.spawn(Name::from("input"))
         .insert(PlayerInput)
         .insert(CursorPosition(Vec2::ZERO))
+        .insert(CameraMovementInput::new())
     ;
 }
 

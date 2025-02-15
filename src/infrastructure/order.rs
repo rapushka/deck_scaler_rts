@@ -5,15 +5,15 @@ pub enum Order {
     Input,
 
     UnitOrders,
+    SelectUnits,
 
-    Preprocess,
     UpdateStats,
     GameLogic,
 
     ChargeAttack,
     CreateAffects,
 
-    Postprocess,
+    MoveUnits,
     InfluenceAffects,
 
     ApplyAffects,
