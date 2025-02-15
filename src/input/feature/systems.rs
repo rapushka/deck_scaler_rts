@@ -1,6 +1,6 @@
 use bevy::window::PrimaryWindow;
-use crate::input::movement::CameraMovementInput;
-use crate::input::{bindings, CursorPosition, JustClickedOrder, JustClickedSelect, PlayerInput};
+use crate::input::camera_movement::CameraMovementInput;
+use crate::input::{bindings, CursorPosition, JustClickedOrder, JustClickedSelect, PlayerInput, PrevCursorPosition};
 use crate::prelude::*;
 
 pub fn init_input(
@@ -9,8 +9,17 @@ pub fn init_input(
     commands.spawn(Name::from("input"))
         .insert(PlayerInput)
         .insert(CursorPosition(Vec2::ZERO))
+        .insert(PrevCursorPosition(Vec2::ZERO))
         .insert(CameraMovementInput::new())
     ;
+}
+
+pub fn update_previous_cursor_position(
+    mut cursors: Query<(&mut PrevCursorPosition, &CursorPosition), With<PlayerInput>>,
+) {
+    for (mut previous_position, current_position) in cursors.iter_mut() {
+        previous_position.0 = current_position.0;
+    }
 }
 
 pub fn update_cursor_position(

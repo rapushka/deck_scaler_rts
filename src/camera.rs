@@ -1,4 +1,4 @@
-use crate::input::movement::CameraMovementInput;
+use crate::input::camera_movement::CameraMovementInput;
 use crate::input::PlayerInput;
 use crate::prelude::*;
 

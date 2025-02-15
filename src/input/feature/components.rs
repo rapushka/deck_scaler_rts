@@ -7,6 +7,9 @@ pub struct PlayerInput;
 pub struct CursorPosition(pub Vec2);
 
 #[derive(Component)]
+pub struct PrevCursorPosition(pub Vec2);
+
+#[derive(Component)]
 pub struct JustClickedSelect;
 
 #[derive(Component)]
