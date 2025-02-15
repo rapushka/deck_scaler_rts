@@ -1,4 +1,4 @@
-use crate::input::movement::CameraMovementInput;
+use crate::input::camera_movement::CameraMovementInput;
 use crate::input::PlayerInput;
 use crate::prelude::*;
 
@@ -17,7 +17,7 @@ fn spawn_camera(
     mut commands: Commands,
 ) {
     commands.spawn(Camera2d)
-        .insert(MovementSpeed(250.0))
+        .insert(MovementSpeed(100.0))
     ;
 }
 
