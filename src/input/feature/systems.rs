@@ -8,7 +8,7 @@ pub fn init_input(
 ) {
     commands.spawn(Name::from("input"))
         .insert(PlayerInput)
-        .insert(CursorPosition(Vec2::ZERO))
+        .insert(CursorWorldPosition(Vec2::ZERO))
         .insert(CursorScreenPosition::new())
         .insert(CameraMovementInput::new())
     ;
@@ -31,7 +31,7 @@ pub fn update_cursor_screen_positions(
 }
 
 pub fn update_cursor_world_position(
-    mut cursors: Query<(&mut CursorPosition, &CursorScreenPosition), With<PlayerInput>>,
+    mut cursors: Query<(&mut CursorWorldPosition, &CursorScreenPosition), With<PlayerInput>>,
     cameras: Query<(&Camera, &GlobalTransform)>,
 ) {
     for (mut input_position, screen_position) in cursors.iter_mut() {

@@ -4,7 +4,7 @@ use crate::prelude::*;
 pub struct PlayerInput;
 
 #[derive(Component)]
-pub struct CursorPosition(pub Vec2);
+pub struct CursorWorldPosition(pub Vec2);
 
 #[derive(Component)]
 pub struct JustClickedSelect;

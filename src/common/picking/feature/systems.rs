@@ -1,9 +1,9 @@
-use crate::input::{CursorPosition, JustClickedSelect, PlayerInput};
+use crate::input::{CursorWorldPosition, JustClickedSelect, PlayerInput};
 use crate::prelude::*;
 
 pub fn handle_clicks(
     entities: Query<(Entity, &Transform, &CircleCollider)>,
-    clicks: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedSelect>)>,
+    clicks: Query<&CursorWorldPosition, (With<PlayerInput>, With<JustClickedSelect>)>,
     mut event: EventWriter<Clicked>,
 ) {
     for (entity, transform, collider) in entities.iter() {
