@@ -7,8 +7,8 @@ pub struct LeadPlugin;
 
 impl Plugin for LeadPlugin {
     fn build(&self, app: &mut App) {
-      app
-          
-      ;
-  }
+        app
+            .add_systems(Update, move_lead.in_set(Order::MoveUnits))
+        ;
+    }
 }

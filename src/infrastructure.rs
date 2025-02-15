@@ -11,11 +11,11 @@ impl Plugin for InfrastructurePlugin {
             .configure_sets(Update, (
                 Order::Input,
                 Order::UnitOrders,
-                Order::Preprocess,
+                Order::SelectUnits,
                 Order::GameLogic,
                 Order::ChargeAttack,
                 Order::CreateAffects,
-                Order::Postprocess,
+                Order::MoveUnits,
                 Order::InfluenceAffects,
                 Order::ApplyAffects,
                 Order::View,

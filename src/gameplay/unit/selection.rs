@@ -18,7 +18,7 @@ impl Plugin for UnitSelectionPlugin {
                 deselect_current_units_on_new_selection,
                 mark_clicked_units_as_selected,
             ).chain()
-                .in_set(Order::Preprocess))
+                .in_set(Order::SelectUnits))
         ;
     }
 }
