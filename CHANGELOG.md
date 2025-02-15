@@ -1,5 +1,5 @@
 # v0.0.21
-
+- [move camera & always ensure selection](https://github.com/rapushka/deck_scaler_rts/pull/29)
 
 # v0.0.20
 - [automatically change unit's mode to manual, on order-click](https://github.com/rapushka/deck_scaler_rts/pull/19)
