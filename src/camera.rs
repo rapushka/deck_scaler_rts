@@ -17,7 +17,7 @@ fn spawn_camera(
     mut commands: Commands,
 ) {
     commands.spawn(Camera2d)
-        .insert(MovementSpeed(100.0))
+        .insert(MovementSpeed(250.0))
     ;
 }
 
