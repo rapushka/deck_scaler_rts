@@ -8,8 +8,8 @@ pub fn multiply_stats_by_sparkle(
         let target_stat = match suit {
             Suit::Spades => Stat::Attack,
             Suit::Clubs => Stat::Defense,
-            Suit::Hearts => todo!(),
-            Suit::Diamonds => todo!(),
+            Suit::Hearts => Stat::Attack, // TODO:
+            Suit::Diamonds => Stat::Attack, // TODO:
         };
 
         modifiers.set(target_stat, Modifier::multiply(*sparkle));

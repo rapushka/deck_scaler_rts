@@ -2,7 +2,6 @@ use crate::gameplay::unit::behaviour_state::auto_mode::AutoAttackState;
 use crate::gameplay::unit::health::Health;
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
-use crate::gameplay::unit::suit::Suit;
 use crate::gameplay::unit::view::LoadingView;
 use crate::input::{CursorPosition, JustClickedOrder, PlayerInput, SetManualUnitStateRequest};
 use crate::prelude::*;
