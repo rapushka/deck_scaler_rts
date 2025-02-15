@@ -1,6 +1,6 @@
 use bevy::window::PrimaryWindow;
 use crate::input::camera_movement::CameraMovementInput;
-use crate::input::{bindings, CursorPosition, JustClickedOrder, JustClickedSelect, PlayerInput, PrevCursorPosition};
+use crate::input::*;
 use crate::prelude::*;
 
 pub fn init_input(
@@ -9,39 +9,39 @@ pub fn init_input(
     commands.spawn(Name::from("input"))
         .insert(PlayerInput)
         .insert(CursorPosition(Vec2::ZERO))
-        .insert(PrevCursorPosition(Vec2::ZERO))
+        .insert(CursorScreenPosition::new())
         .insert(CameraMovementInput::new())
     ;
 }
 
-pub fn update_previous_cursor_position(
-    mut cursors: Query<(&mut PrevCursorPosition, &CursorPosition), With<PlayerInput>>,
+pub fn update_cursor_screen_positions(
+    mut cursors: Query<&mut CursorScreenPosition, With<PlayerInput>>,
+    windows: Query<&Window, With<PrimaryWindow>>,
 ) {
-    for (mut previous_position, current_position) in cursors.iter_mut() {
-        previous_position.0 = current_position.0;
+    for mut cursor in cursors.iter_mut() {
+        for window in windows.iter() {
+            let Some(screen_position) = window.cursor_position() else {
+                continue;
+            };
+
+            cursor.previous = cursor.current;
+            cursor.current = screen_position;
+        }
     }
 }
 
-pub fn update_cursor_position(
-    mut cursors: Query<&mut CursorPosition, With<PlayerInput>>,
-    windows: Query<&Window, With<PrimaryWindow>>,
+pub fn update_cursor_world_position(
+    mut cursors: Query<(&mut CursorPosition, &CursorScreenPosition), With<PlayerInput>>,
     cameras: Query<(&Camera, &GlobalTransform)>,
 ) {
-    for mut input_position in cursors.iter_mut() {
+    for (mut input_position, screen_position) in cursors.iter_mut() {
         for (camera, camera_transform) in cameras.iter() {
-            for window in windows.iter() {
-                let Some(cursor_position) = window.cursor_position() else {
-                    continue;
-                };
+            let screen_position = screen_position.current;
+            let Ok(world_position) = camera.viewport_to_world(camera_transform, screen_position) else {
+                continue;
+            };
 
-                let Ok(world_position) = camera.viewport_to_world(camera_transform, cursor_position) else {
-                    continue;
-                };
-
-                let position = world_position.origin.truncate();
-
-                input_position.0 = position;
-            }
+            input_position.0 = world_position.origin.truncate();
         }
     }
 }

@@ -1,6 +1,6 @@
 use crate::prelude::*;
 pub use feature::*;
-use crate::input::feature::update_cursor_position;
+use crate::input::feature::update_cursor_world_position;
 
 mod feature;
 
@@ -15,7 +15,7 @@ impl Plugin for InputCameraMovementPlugin {
                 update_wasd_movement,
                 scroll_camera,
             ).chain()
-                .after(update_cursor_position)
+                .after(update_cursor_world_position)
                 .in_set(Order::Input))
         ;
     }
