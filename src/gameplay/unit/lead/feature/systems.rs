@@ -5,11 +5,11 @@ use crate::prelude::*;
 
 pub fn move_lead(
     inputs: Query<&MovementInput, With<PlayerInput>>,
-    mut entities: Query<(&mut Transform, &MovementSpeed), With<Lead>>,
+    mut leads: Query<(&mut Transform, &MovementSpeed), With<Lead>>,
     time: Res<Time<Virtual>>,
 ) {
     for MovementInput(movement) in inputs.iter() {
-        for (mut transform, speed) in entities.iter_mut() {
+        for (mut transform, speed) in leads.iter_mut() {
             let position = &mut transform.translation;
             let scaled_speed = speed.0 * time.delta_secs();
 

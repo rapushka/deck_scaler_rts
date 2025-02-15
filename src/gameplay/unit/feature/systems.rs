@@ -29,7 +29,7 @@ pub fn spawn_unit(
     mut commands: Commands,
     mut events: EventReader<SpawnUnit>,
 ) {
-    for SpawnUnit { id, position, side, is_lead} in events.read() {
+    for SpawnUnit { id, position, side, is_lead } in events.read() {
         let id = *id;
         let stat_props = get_base_stats(id);
         let health = stat_props.max_health;
@@ -47,7 +47,7 @@ pub fn spawn_unit(
             .insert(Health(health))
             .insert(Sparkle(1.0))
             .insert(NextSparkleCharge(0.0))
-        ;
+            ;
 
         if *is_lead {
             unit.insert(Lead);
@@ -77,22 +77,5 @@ fn get_base_stats(unit_id: UnitID) -> StatProps<f32> {
             sparkle_capacity: 10.0,
             sparkle_charge_rate: 1.0,
         },
-    }
-}
-
-pub fn order_target_position(
-    mut commands: Commands,
-    units: Query<Entity, (With<UnitID>, With<SelectedUnit>)>,
-    cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedOrder>)>,
-    mut event: EventWriter<SetManualUnitStateRequest>,
-) {
-    for unit in units.iter() {
-        for cursor_position in cursors.iter() {
-            commands.entity(unit)
-                .insert(TargetPosition(cursor_position.0))
-            ;
-
-            event.send(SetManualUnitStateRequest);
-        }
     }
 }
