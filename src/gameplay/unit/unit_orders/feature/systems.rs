@@ -1,10 +1,11 @@
 use crate::common::TargetPosition;
+use crate::gameplay::unit::side::feature::OnPlayerSide;
 use crate::input::{CursorPosition, JustClickedOrder, PlayerInput, SetManualUnitStateRequest};
 use crate::prelude::{Commands, Entity, EventWriter, Query, SelectedUnit, UnitID, With};
 
 pub fn order_target_position(
     mut commands: Commands,
-    selected_units: Query<Entity, (With<UnitID>, With<SelectedUnit>)>,
+    selected_units: Query<Entity, (With<UnitID>, With<SelectedUnit>, With<OnPlayerSide>)>,
     cursors: Query<&CursorPosition, (With<PlayerInput>, With<JustClickedOrder>)>,
     mut event: EventWriter<SetManualUnitStateRequest>,
 ) {

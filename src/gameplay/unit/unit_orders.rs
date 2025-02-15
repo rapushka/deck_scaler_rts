@@ -1,5 +1,5 @@
 use crate::prelude::*;
-pub use feature::*;
+use feature::*;
 
 mod feature;
 
