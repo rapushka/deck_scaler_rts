@@ -14,17 +14,6 @@ pub fn test_require_spawn_unit(
         position: Vec2::new(0.0, -200.0),
         side: Side::Player,
     });
-    events.send(SpawnUnit {
-        id: UnitID::Crook,
-        position: Vec2::new(-150.0, -200.0),
-        side: Side::Player,
-    });
-
-    events.send(SpawnUnit {
-        id: UnitID::Rat,
-        position: Vec2::new(100.0, 200.0),
-        side: Side::Enemy,
-    });
 }
 
 pub fn spawn_unit(

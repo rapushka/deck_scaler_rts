@@ -1,7 +1,7 @@
-chain_style = "new_line"
 disable_all_formatting = true
+chain_style = "new_line"
 edition = "2021"
-fn_params_layout = "Vertical"
+fn_params_layout = "Tall"
 match_block_trailing_comma = true
 overflow_delimited_expr = true
 reorder_impl_items = true
