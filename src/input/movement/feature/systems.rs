@@ -1,12 +1,12 @@
 use input::bindings;
 use crate::input;
-use crate::input::movement::MovementInput;
+use crate::input::movement::CameraMovementInput;
 use crate::input::PlayerInput;
 use crate::prelude::*;
 
 pub fn update_movement(
     input: Res<ButtonInput<KeyCode>>,
-    mut entities: Query<&mut MovementInput, With<PlayerInput>>,
+    mut entities: Query<&mut CameraMovementInput, With<PlayerInput>>,
 ) {
     for mut movement in entities.iter_mut() {
         let mut tmp = Vec2::ZERO;

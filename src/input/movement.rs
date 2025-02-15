@@ -8,7 +8,7 @@ pub struct InputMovementPlugin;
 impl Plugin for InputMovementPlugin {
     fn build(&self, app: &mut App) {
         app
-            .register_type::<MovementInput>()
+            .register_type::<CameraMovementInput>()
 
             .add_systems(Update, (
                 update_movement,
