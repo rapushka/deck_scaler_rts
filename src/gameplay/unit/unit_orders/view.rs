@@ -1,3 +1,4 @@
+use crate::assets::UiAssets;
 use crate::input::*;
 use crate::prelude::*;
 
@@ -7,26 +8,34 @@ impl Plugin for UnitOrdersViewPlugin {
     fn build(&self, app: &mut App) {
         app
 
-            .add_systems(Update, view_unit_order.after(Order::UnitOrders))
+            .add_systems(Update, view_unit_order
+                .run_if(in_state(AppState::Gameplay))
+                .after(Order::UnitOrders))
         ;
     }
 }
 
-const ANIMATION_DURATION: f32 = 0.5;
+const ANIMATION_DURATION: f32 = 0.3;
 
 fn view_unit_order(
     mut commands: Commands,
     orders: Query<&CursorWorldPosition, (With<PlayerInput>, With<JustClickedOrder>)>,
+    assets: Res<UiAssets>,
 ) {
     for cursor_position in orders.iter() {
-        let cursor_position = cursor_position.0.extend(0.0);
+        let cursor_position = cursor_position.0.extend(10.0);
 
-        let transform = Transform::from_translation(cursor_position);
+        let transform = Transform {
+            translation: cursor_position,
+            scale: Vec3::splat(0.4),
+            rotation: Quat::from_rotation_z(45.0_f32.to_radians()),
+        };
+
         let mut tmp = commands.spawn(Name::from("order pointer"));
         let view = tmp
             .insert(Sprite {
-                color: Color::Srgba(Srgba::GREEN),
-                custom_size: Some(Vec2::new(25.0, 25.0)),
+                image: assets.arrows.clone(),
+                color: Color::Srgba(Srgba::new(1.0, 1.0, 1.0, 0.5)),
                 ..default()
             })
             .insert(transform)
@@ -40,12 +49,17 @@ fn view_unit_order(
             .animation()
             .length(ANIMATION_DURATION.to_seconds())
             .insert(
-                tween::sequence((
+                tween::parallel((
                     DO(
                         ANIMATION_DURATION.to_seconds(),
                         EaseKind::BackIn,
                         transform.scale_to(Vec3::splat(0.0)),
                     ),
+                    // DO(
+                    //     ANIMATION_DURATION.to_seconds(),
+                    //     EaseKind::BackIn,
+                    //     transform.rotation_to(Quat::from_rotation_z(-1.0)),
+                    // ),
                 ))
             )
         ;

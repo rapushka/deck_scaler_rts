@@ -10,6 +10,7 @@ impl Plugin for AssetsPlugin {
                 LoadingState::new(AppState::Bootstrap)
                     .load_collection::<UnitAssets>()
                     .load_collection::<SuitAssets>()
+                    .load_collection::<UiAssets>()
                     .continue_to_state(AppState::Gameplay)
             )
         ;
@@ -58,4 +59,10 @@ impl SuitAssets {
             Suit::Diamonds => self.diamonds.clone(),
         }
     }
+}
+
+#[derive(AssetCollection, Resource)]
+pub struct UiAssets {
+    #[asset(path = "ui/arrows.png")]
+    pub arrows: Handle<Image>,
 }
