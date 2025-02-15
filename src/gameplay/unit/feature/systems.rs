@@ -4,7 +4,7 @@ use crate::gameplay::unit::lead::Lead;
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
-use crate::input::{CursorPosition, JustClickedOrder, PlayerInput, SetManualUnitStateRequest};
+use crate::input::*;
 use crate::prelude::*;
 
 pub fn test_require_spawn_unit(
@@ -15,6 +15,13 @@ pub fn test_require_spawn_unit(
         position: Vec2::new(0.0, -200.0),
         side: Side::Player,
         is_lead: true,
+    });
+
+    events.send(SpawnUnit {
+        id: UnitID::Crook,
+        position: Vec2::new(100.0, -200.0),
+        side: Side::Player,
+        is_lead: false,
     });
 }
 
