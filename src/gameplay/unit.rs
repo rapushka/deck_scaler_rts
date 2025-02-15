@@ -12,6 +12,7 @@ use side::*;
 pub use suit::*;
 pub use defense::*;
 pub use sparkle::*;
+use lead::*;
 
 mod feature;
 
@@ -26,6 +27,7 @@ mod defense;
 mod health;
 mod suit;
 mod sparkle;
+mod lead;
 
 pub struct UnitPlugin;
 
@@ -43,6 +45,7 @@ impl Plugin for UnitPlugin {
             .add_plugins(HealthPlugin)
             .add_plugins(SuitsPlugin)
             .add_plugins(SparklePlugin)
+            .add_plugins(LeadPlugin)
 
             .add_event::<SpawnUnit>()
 

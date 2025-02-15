@@ -1,5 +1,6 @@
 use crate::gameplay::unit::behaviour_state::auto_mode::AutoAttackState;
 use crate::gameplay::unit::health::Health;
+use crate::gameplay::unit::lead::Lead;
 use crate::gameplay::unit::side::feature::Side;
 use crate::gameplay::unit::stats::*;
 use crate::gameplay::unit::view::LoadingView;
@@ -13,6 +14,7 @@ pub fn test_require_spawn_unit(
         id: UnitID::Crook,
         position: Vec2::new(0.0, -200.0),
         side: Side::Player,
+        is_lead: true,
     });
 }
 
@@ -20,12 +22,13 @@ pub fn spawn_unit(
     mut commands: Commands,
     mut events: EventReader<SpawnUnit>,
 ) {
-    for SpawnUnit { id, position, side } in events.read() {
+    for SpawnUnit { id, position, side, is_lead} in events.read() {
         let id = *id;
         let stat_props = get_base_stats(id);
         let health = stat_props.max_health;
 
-        commands.spawn(Name::from(f!("{id:?}")))
+        let mut command = commands.spawn(Name::from(f!("{id:?}")));
+        let unit = command
             .insert(id)
             .insert(LoadingView)
             .insert(BaseStats::new(stat_props))
@@ -38,6 +41,10 @@ pub fn spawn_unit(
             .insert(Sparkle(1.0))
             .insert(NextSparkleCharge(0.0))
         ;
+
+        if *is_lead {
+            unit.insert(Lead);
+        }
     }
 }
 
