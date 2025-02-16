@@ -57,7 +57,7 @@ pub fn on_attack_charged(
 pub fn create_attack_affect(
     mut commands: Commands,
     mut events: EventReader<AttackCharged>,
-    attackers: Query<(Entity, &Opponent, &Attack)>,
+    attackers: Query<(Entity, &Opponent, &AttackDamage)>,
 ) {
     for AttackCharged(attacker) in events.read() {
         let (attacker, opponent, damage) = cq!(attackers.get(*attacker));

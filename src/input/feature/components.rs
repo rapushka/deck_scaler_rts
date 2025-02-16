@@ -1,3 +1,4 @@
+use bevy::ecs::component::StorageType;
 use crate::prelude::*;
 
 #[derive(Component)]
@@ -6,11 +7,16 @@ pub struct PlayerInput;
 #[derive(Component)]
 pub struct CursorWorldPosition(pub Vec2);
 
-#[derive(Component)]
 pub struct JustClickedSelect;
 
-#[derive(Component)]
+impl Component for JustClickedSelect {
+    const STORAGE_TYPE: StorageType = StorageType::SparseSet;
+}
 pub struct JustClickedOrder;
+
+impl Component for JustClickedOrder {
+    const STORAGE_TYPE: StorageType = StorageType::SparseSet;
+}
 
 #[derive(Component, Reflect)]
 #[reflect(Component)]

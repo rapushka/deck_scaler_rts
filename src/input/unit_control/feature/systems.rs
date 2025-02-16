@@ -1,25 +1,12 @@
-use crate::input::bindings;
-use crate::input::unit_control::{SetAutoUnitStateRequest, SetManualUnitStateRequest};
-use crate::prelude::*;
+use crate::input::*;
 
-pub fn emit_state_change_input_to_auto(
+pub fn emit_toggle_attack_status(
     input: Res<ButtonInput<KeyCode>>,
-    mut event: EventWriter<SetAutoUnitStateRequest>,
+    mut event: EventWriter<ToggleAttackStatus>,
 ) {
-    let is_pressed = input.just_pressed(bindings::AUTO_STATE);
+    let is_pressed = input.just_pressed(bindings::TOGGLE_ATTACK);
 
     if is_pressed {
-        event.send(SetAutoUnitStateRequest);
-    }
-}
-
-pub fn emit_state_change_input_to_manual(
-    input: Res<ButtonInput<KeyCode>>,
-    mut event: EventWriter<SetManualUnitStateRequest>,
-) {
-    let is_pressed = input.just_pressed(bindings::MANUAL_STATE);
-
-    if is_pressed {
-        event.send(SetManualUnitStateRequest);
+        event.send(ToggleAttackStatus);
     }
 }
