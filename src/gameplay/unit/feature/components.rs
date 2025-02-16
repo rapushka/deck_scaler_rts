@@ -1,4 +1,4 @@
-use crate::gameplay::unit::side::feature::Side;
+use crate::gameplay::unit::side::feature::OnSide;
 use crate::prelude::*;
 
 #[derive(Component, Debug, Copy, Clone)]
@@ -11,6 +11,6 @@ pub enum UnitID {
 pub struct SpawnUnit {
     pub id: UnitID,
     pub position: Vec2,
-    pub side: Side,
+    pub side: OnSide,
     pub is_lead: bool,
 }

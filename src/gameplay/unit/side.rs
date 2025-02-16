@@ -1,5 +1,5 @@
-use crate::gameplay::unit::feature::spawn_unit;
 use crate::gameplay::unit::side::feature::on_side_added;
+use crate::gameplay::unit::spawn::spawn_unit;
 use crate::prelude::*;
 
 pub mod feature;

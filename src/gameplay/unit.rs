@@ -5,29 +5,31 @@ pub use feature::*;
 use stats::*;
 pub use selection::*;
 use attack::AttackPlugin;
-use behaviour_state::UnitBehaviourPlugin;
+use status::UnitStatusPlugin;
 pub use health::*;
 use opponent::*;
 use side::*;
 pub use suit::*;
 pub use defense::*;
-pub use sparkle::*;
 use lead::*;
-use crate::gameplay::unit::unit_orders::UnitOrdersPlugin;
+use spawn::*;
+use unit_orders::UnitOrdersPlugin;
+use crate::gameplay::unit::trigger::TriggerUnitPlugin;
 
 mod feature;
-
 mod view;
+
+mod spawn;
 mod stats;
 pub mod selection;
 mod side;
+mod trigger;
 mod opponent;
-mod behaviour_state;
+pub mod status;
 mod attack;
 mod defense;
 mod health;
 mod suit;
-mod sparkle;
 mod lead;
 mod unit_orders;
 
@@ -40,13 +42,13 @@ impl Plugin for UnitPlugin {
             .add_plugins(StatsPlugin)
             .add_plugins(UnitSelectionPlugin)
             .add_plugins(UnitSidePlugin)
+            .add_plugins(TriggerUnitPlugin)
             .add_plugins(OpponentPlugin)
-            .add_plugins(UnitBehaviourPlugin)
+            .add_plugins(UnitStatusPlugin)
             .add_plugins(AttackPlugin)
             .add_plugins(DefensePlugin)
             .add_plugins(HealthPlugin)
             .add_plugins(SuitsPlugin)
-            .add_plugins(SparklePlugin)
             .add_plugins(LeadPlugin)
             .add_plugins(UnitOrdersPlugin)
 
