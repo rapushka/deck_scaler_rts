@@ -14,6 +14,7 @@ pub use defense::*;
 use lead::*;
 use spawn::*;
 use unit_orders::UnitOrdersPlugin;
+use crate::gameplay::unit::trigger::TriggerUnitPlugin;
 
 mod feature;
 mod view;
@@ -22,6 +23,7 @@ mod spawn;
 mod stats;
 pub mod selection;
 mod side;
+mod trigger;
 mod opponent;
 pub mod status;
 mod attack;
@@ -40,6 +42,7 @@ impl Plugin for UnitPlugin {
             .add_plugins(StatsPlugin)
             .add_plugins(UnitSelectionPlugin)
             .add_plugins(UnitSidePlugin)
+            .add_plugins(TriggerUnitPlugin)
             .add_plugins(OpponentPlugin)
             .add_plugins(UnitStatusPlugin)
             .add_plugins(AttackPlugin)

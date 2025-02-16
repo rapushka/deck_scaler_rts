@@ -1,16 +1,16 @@
 use crate::prelude::*;
 
 #[derive(Component, Debug, Copy, Clone, Eq, PartialEq)]
-pub enum Side {
+pub enum OnSide {
     Player,
     Enemy,
 }
 
-impl Side {
+impl OnSide {
     pub fn flip(&self) -> Self {
         match self {
-            Side::Player => Side::Enemy,
-            Side::Enemy => Side::Player,
+            OnSide::Player => OnSide::Enemy,
+            OnSide::Enemy => OnSide::Player,
         }
     }
 }

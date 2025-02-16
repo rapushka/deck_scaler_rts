@@ -1,4 +1,4 @@
-use crate::gameplay::unit::side::feature::Side;
+use crate::gameplay::unit::side::feature::OnSide;
 use crate::prelude::*;
 
 pub fn test_require_spawn_unit(
@@ -7,14 +7,14 @@ pub fn test_require_spawn_unit(
     events.send(SpawnUnit {
         id: UnitID::Crook,
         position: Vec2::new(0.0, -200.0),
-        side: Side::Player,
+        side: OnSide::Player,
         is_lead: true,
     });
 
     events.send(SpawnUnit {
         id: UnitID::Crook,
         position: Vec2::new(100.0, -200.0),
-        side: Side::Player,
+        side: OnSide::Player,
         is_lead: false,
     });
 
@@ -22,7 +22,7 @@ pub fn test_require_spawn_unit(
     events.send(SpawnUnit {
         id: UnitID::Rat,
         position: Vec2::new(100.0, 500.0),
-        side: Side::Enemy,
+        side: OnSide::Enemy,
         is_lead: false,
     });
 }

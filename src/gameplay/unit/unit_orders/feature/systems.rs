@@ -2,7 +2,7 @@ use crate::common::TargetPosition;
 use crate::gameplay::unit::side::feature::OnPlayerSide;
 use crate::input::*;
 use crate::prelude::*;
-use crate::prelude::status::OrderMoveToPosition;
+use crate::prelude::status::*;
 
 pub fn order_target_position(
     mut commands: Commands,

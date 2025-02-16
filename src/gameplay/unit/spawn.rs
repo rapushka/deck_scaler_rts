@@ -1,6 +1,7 @@
 use crate::common::CircleCollider;
 use crate::gameplay::unit::lead::Lead;
 use crate::gameplay::unit::stats::{BaseStats, StatProps, StatsModifiers};
+use crate::gameplay::unit::trigger::TriggerDistance;
 use crate::gameplay::unit::view::LoadingView;
 use crate::prelude::*;
 use crate::prelude::status::*;
@@ -25,6 +26,7 @@ pub fn spawn_unit(
             .insert(*side)
             .insert(Health(health))
             .insert(AutoAttackInRange)
+            .insert(TriggerDistance(250.0))
             ;
 
         if *is_lead {
