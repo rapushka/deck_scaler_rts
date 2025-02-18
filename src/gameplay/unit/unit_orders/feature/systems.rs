@@ -7,13 +7,13 @@ use crate::prelude::status::*;
 pub fn order_target_position(
     mut commands: Commands,
     selected_units: Query<Entity, (With<UnitID>, With<SelectedUnit>, With<OnPlayerSide>)>,
-    cursors: Query<&CursorWorldPosition, (With<PlayerInput>, With<JustClickedTarget>)>,
+    mut event: EventReader<ClickTargetPosition>,
 ) {
-    for unit in selected_units.iter() {
-        for cursor_position in cursors.iter() {
+    for ClickTargetPosition(position) in event.read() {
+        for unit in selected_units.iter() {
             commands.entity(unit)
-                .insert(TargetPosition(cursor_position.0))
-                .insert(OrderMoveToPosition(cursor_position.0))
+                .insert(TargetPosition(*position))
+                .insert(OrderMoveToPosition(*position))
             ;
         }
     }
