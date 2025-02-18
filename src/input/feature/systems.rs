@@ -70,9 +70,9 @@ pub fn update_cursor_order_click(
         let is_clicked = input.just_pressed(bindings::ORDER_TARGET);
 
         if is_clicked {
-            commands.entity(cursor).insert(JustClickedOrder);
+            commands.entity(cursor).insert(JustClickedTarget);
         } else {
-            commands.entity(cursor).remove::<JustClickedOrder>();
+            commands.entity(cursor).remove::<JustClickedTarget>();
         }
     }
 }

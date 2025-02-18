@@ -2,11 +2,11 @@ use crate::prelude::selection::feature::SelectedUnit;
 use crate::prelude::*;
 
 pub fn mark_units_selected(
-    mut clicks: EventReader<Clicked>,
+    mut clicks: EventReader<ClickSelect>,
     units: Query<Entity, With<UnitID>>,
     mut event: EventWriter<MarkUnitSelected>,
 ) {
-    for Clicked(target) in clicks.read() {
+    for ClickSelect(target) in clicks.read() {
         let Ok(unit) = units.get(*target) else {
             continue;
         };

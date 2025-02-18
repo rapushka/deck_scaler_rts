@@ -1,7 +1,13 @@
 use crate::prelude::*;
 
 #[derive(Event)]
-pub struct Clicked(pub Entity);
+pub struct ClickSelect(pub Entity);
+
+#[derive(Event)]
+pub struct ClickTargetUnit(pub Entity);
+
+#[derive(Event)]
+pub struct ClickTargetPosition(pub Vec2);
 
 #[derive(Component)]
 pub struct CircleCollider {
