@@ -12,9 +12,9 @@ pub struct JustClickedSelect;
 impl Component for JustClickedSelect {
     const STORAGE_TYPE: StorageType = StorageType::SparseSet;
 }
-pub struct JustClickedOrder;
+pub struct JustClickedTarget;
 
-impl Component for JustClickedOrder {
+impl Component for JustClickedTarget {
     const STORAGE_TYPE: StorageType = StorageType::SparseSet;
 }
 
