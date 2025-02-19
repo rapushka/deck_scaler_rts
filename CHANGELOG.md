@@ -1,3 +1,6 @@
+# v0.0.22
+- [select enemy units as targets](https://github.com/rapushka/deck_scaler_rts/pull/39)
+
 # v0.0.21
 - [move camera & always ensure selection](https://github.com/rapushka/deck_scaler_rts/pull/29)
 - [spawn the "level" (just a gray rectangle in fact)](https://github.com/rapushka/deck_scaler_rts/pull/31)
