@@ -12,7 +12,10 @@ impl Plugin for UnitOrdersPlugin {
         app
             .add_plugins(UnitOrdersViewPlugin)
 
-            .add_systems(Update, order_target_position
+            .add_systems(Update, (
+                order_target_position,
+                order_attack_enemy,
+            )
                 .run_if(in_state(AppState::Gameplay))
                 .in_set(Order::UnitOrders),
             )

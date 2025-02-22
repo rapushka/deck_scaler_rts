@@ -1,5 +1,5 @@
 use crate::common::TargetPosition;
-use crate::gameplay::unit::side::feature::OnPlayerSide;
+use crate::gameplay::unit::side::feature::{OnEnemySide, OnPlayerSide};
 use crate::input::*;
 use crate::prelude::*;
 use crate::prelude::status::*;
@@ -13,22 +13,25 @@ pub fn order_target_position(
         for unit in selected_units.iter() {
             commands.entity(unit)
                 .insert(TargetPosition(*position))
-                .insert(OrderMoveToPosition(*position))
+                .remove::<AutoAttackInRange>()
             ;
         }
     }
 }
 
-pub fn order_attack_unit(
+pub fn order_attack_enemy(
     mut commands: Commands,
     selected_units: Query<Entity, (With<UnitID>, With<SelectedUnit>, With<OnPlayerSide>)>,
-    cursors: Query<&CursorWorldPosition, (With<PlayerInput>, With<JustClickedTarget>)>,
+    mut event: EventReader<ClickTargetUnit>,
+    enemies: Query<&Transform, With<OnEnemySide>>,
 ) {
-    for unit in selected_units.iter() {
-        for cursor_position in cursors.iter() {
-            commands.entity(unit)
-                .insert(TargetPosition(cursor_position.0))
-                .insert(OrderMoveToPosition(cursor_position.0))
+    for selected_unit in selected_units.iter() {
+        for ClickTargetUnit(target_unit) in event.read() {
+            let enemy_transform = cq!(enemies.get(*target_unit));
+
+            commands.entity(selected_unit)
+                .insert(TargetPosition(enemy_transform.translation.truncate()))
+                .remove::<AutoAttackInRange>()
             ;
         }
     }
