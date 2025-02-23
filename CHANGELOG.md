@@ -1,5 +1,6 @@
 # v0.0.22
 - [select enemy units as targets](https://github.com/rapushka/deck_scaler_rts/pull/39)
+- [allow unit to change target if enemy is targeted](https://github.com/rapushka/deck_scaler_rts/pull/42)
 
 # v0.0.21
 - [move camera & always ensure selection](https://github.com/rapushka/deck_scaler_rts/pull/29)
