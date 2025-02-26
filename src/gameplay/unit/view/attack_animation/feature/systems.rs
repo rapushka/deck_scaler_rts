@@ -15,14 +15,17 @@ pub fn play_attack_animation(
     global_transforms: Query<&GlobalTransform>,
 ) {
     for AttackCharged(attacker) in events.read() {
-        let (unit, UnitHeadView(head), AttackAnimator(animator), Opponent(opponent)) = cq!(units.get(*attacker));
-        let transform = cq!(transforms.get(*head));
+        let Ok((unit, head, animator, opponent)) = units.get(*attacker) else {
+            continue;
+        };
 
-        let target = head.into_target();
+        let transform = transforms.get(head.0).unwrap();
+
+        let target = head.0.into_target();
         let mut transform = target.transform_state(*transform);
 
-        let attacker_world_position = cq!(global_transforms.get(unit)).translation();
-        let target_world_position = cq!(global_transforms.get(*opponent)).translation();
+        let attacker_world_position = global_transforms.get(unit).unwrap().translation();
+        let target_world_position = global_transforms.get(opponent.0).unwrap().translation();
         let direction = (target_world_position - attacker_world_position).normalize();
         let offset = direction * 25.0;
 
@@ -30,7 +33,7 @@ pub fn play_attack_animation(
             .insert(PlayingAttackAnimation(ATTACK_ANIMATION_DURATION.to_timer()))
         ;
 
-        commands.entity(*animator)
+        commands.entity(animator.0)
             .insert(TweenTarget)
 
             .animation()
