@@ -24,10 +24,16 @@ pub fn order_target_position(
 pub fn order_attack_enemy(
     mut commands: Commands,
     selected_units: Query<Entity, (With<UnitID>, With<SelectedUnit>, With<OnPlayerSide>)>,
+    enemies: Query<(), With<OnEnemySide>>,
     mut event: EventReader<ClickTargetUnit>,
 ) {
     for selected_unit in selected_units.iter() {
         for ClickTargetUnit(target_unit) in event.read() {
+            let is_enemy = enemies.contains(*target_unit);
+            if !is_enemy {
+                continue;
+            }
+
             commands.entity(selected_unit)
                 .insert(Opponent(*target_unit))
                 .remove::<AutoAttackInRange>()

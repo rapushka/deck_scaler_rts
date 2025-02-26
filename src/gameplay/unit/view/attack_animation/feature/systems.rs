@@ -56,10 +56,11 @@ pub fn play_attack_animation(
 
 pub fn end_attack_animation(
     mut commands: Commands,
-    mut units: Query<(Entity, &mut PlayingAttackAnimation, &AttackAnimator)>,
+    mut units: Query<(Entity, &mut PlayingAttackAnimation, &AttackAnimator, &UnitHeadView)>,
     time: Res<Time<Virtual>>,
+    mut transforms: Query<&mut Transform>,
 ) {
-    for (unit, mut animation, AttackAnimator(animator)) in units.iter_mut() {
+    for (unit, mut animation, AttackAnimator(animator), UnitHeadView(head)) in units.iter_mut() {
         let timer = &mut animation.0;
         timer.tick(time.delta());
 
@@ -70,6 +71,9 @@ pub fn end_attack_animation(
         commands.entity(unit)
             .remove::<PlayingAttackAnimation>()
         ;
+
+        let mut head_transform = transforms.get_mut(*head).unwrap();
+        head_transform.translation = Vec3::ZERO;
 
         commands.entity(*animator)
             .despawn_descendants()
