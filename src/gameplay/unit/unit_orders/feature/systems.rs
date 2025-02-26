@@ -15,6 +15,7 @@ pub fn order_target_position(
             commands.entity(unit)
                 .insert(TargetPosition(*position))
                 .remove::<AutoAttackInRange>()
+                .remove::<Opponent>()
             ;
         }
     }
