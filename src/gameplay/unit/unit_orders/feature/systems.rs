@@ -1,4 +1,5 @@
 use crate::common::TargetPosition;
+use crate::gameplay::unit::opponent::Opponent;
 use crate::gameplay::unit::side::feature::{OnEnemySide, OnPlayerSide};
 use crate::input::*;
 use crate::prelude::*;
@@ -23,14 +24,11 @@ pub fn order_attack_enemy(
     mut commands: Commands,
     selected_units: Query<Entity, (With<UnitID>, With<SelectedUnit>, With<OnPlayerSide>)>,
     mut event: EventReader<ClickTargetUnit>,
-    enemies: Query<&Transform, With<OnEnemySide>>,
 ) {
     for selected_unit in selected_units.iter() {
         for ClickTargetUnit(target_unit) in event.read() {
-            let enemy_transform = cq!(enemies.get(*target_unit));
-
             commands.entity(selected_unit)
-                .insert(TargetPosition(enemy_transform.translation.truncate()))
+                .insert(Opponent(*target_unit))
                 .remove::<AutoAttackInRange>()
             ;
         }
