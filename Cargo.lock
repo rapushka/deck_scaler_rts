@@ -1939,7 +1939,7 @@ checksum = "0e60eed09d8c01d3cee5b7d30acb059b76614c918fa0f992e0dd6eeb10daad6f"
 
 [[package]]
 name = "deck_scaler_rts"
-version = "0.0.22"
+version = "0.0.23"
 dependencies = [
  "bevy",
  "bevy-inspector-egui",

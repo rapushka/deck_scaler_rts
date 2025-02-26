@@ -15,14 +15,17 @@ pub fn play_attack_animation(
     global_transforms: Query<&GlobalTransform>,
 ) {
     for AttackCharged(attacker) in events.read() {
-        let (unit, UnitHeadView(head), AttackAnimator(animator), Opponent(opponent)) = cq!(units.get(*attacker));
-        let transform = cq!(transforms.get(*head));
+        let Ok((unit, head, animator, opponent)) = units.get(*attacker) else {
+            continue;
+        };
 
-        let target = head.into_target();
+        let transform = transforms.get(head.0).unwrap();
+
+        let target = head.0.into_target();
         let mut transform = target.transform_state(*transform);
 
-        let attacker_world_position = cq!(global_transforms.get(unit)).translation();
-        let target_world_position = cq!(global_transforms.get(*opponent)).translation();
+        let attacker_world_position = global_transforms.get(unit).unwrap().translation();
+        let target_world_position = global_transforms.get(opponent.0).unwrap().translation();
         let direction = (target_world_position - attacker_world_position).normalize();
         let offset = direction * 25.0;
 
@@ -30,7 +33,7 @@ pub fn play_attack_animation(
             .insert(PlayingAttackAnimation(ATTACK_ANIMATION_DURATION.to_timer()))
         ;
 
-        commands.entity(*animator)
+        commands.entity(animator.0)
             .insert(TweenTarget)
 
             .animation()
@@ -53,10 +56,11 @@ pub fn play_attack_animation(
 
 pub fn end_attack_animation(
     mut commands: Commands,
-    mut units: Query<(Entity, &mut PlayingAttackAnimation, &AttackAnimator)>,
+    mut units: Query<(Entity, &mut PlayingAttackAnimation, &AttackAnimator, &UnitHeadView)>,
     time: Res<Time<Virtual>>,
+    mut transforms: Query<&mut Transform>,
 ) {
-    for (unit, mut animation, AttackAnimator(animator)) in units.iter_mut() {
+    for (unit, mut animation, AttackAnimator(animator), UnitHeadView(head)) in units.iter_mut() {
         let timer = &mut animation.0;
         timer.tick(time.delta());
 
@@ -67,6 +71,9 @@ pub fn end_attack_animation(
         commands.entity(unit)
             .remove::<PlayingAttackAnimation>()
         ;
+
+        let mut head_transform = transforms.get_mut(*head).unwrap();
+        head_transform.translation = Vec3::ZERO;
 
         commands.entity(*animator)
             .despawn_descendants()
