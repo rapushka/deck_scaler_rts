@@ -17,21 +17,17 @@ fn spawn_camera(
     mut commands: Commands,
 ) {
     commands.spawn(Camera2d)
-        .insert(MovementSpeed(100.0))
+        .insert(MovementSpeed(750.0))
     ;
 }
 
 fn move_camera(
     inputs: Query<&CameraMovementInput, With<PlayerInput>>,
-    mut cameras: Query<(&mut Transform, &MovementSpeed), With<Camera2d>>,
-    time: Res<Time<Virtual>>,
+    mut cameras: Query<&mut Transform, With<Camera2d>>,
 ) {
     for CameraMovementInput(movement) in inputs.iter() {
-        for (mut transform, speed) in cameras.iter_mut() {
+        for mut transform in cameras.iter_mut() {
             let position = &mut transform.translation;
-            let scaled_speed = speed.0 * time.delta_secs();
-
-            let movement = movement * scaled_speed;
 
             *position += movement.extend(0.0);
         }

@@ -1,30 +1,33 @@
 use input::bindings;
 use crate::input;
-use crate::input::camera_movement::CameraMovementInput;
+use crate::input::camera_movement::*;
 use crate::input::*;
-use crate::prelude::*;
 
 pub fn update_wasd_movement(
     input: Res<ButtonInput<KeyCode>>,
     mut inputs: Query<&mut CameraMovementInput, With<PlayerInput>>,
+    cameras: Query<&MovementSpeed, With<Camera>>,
+    time: Res<Time<Virtual>>,
 ) {
-    for mut movement in inputs.iter_mut() {
-        let mut tmp = Vec2::ZERO;
+    for camera_movement_speed in cameras.iter() {
+        for mut movement in inputs.iter_mut() {
+            let mut tmp = Vec2::ZERO;
 
-        if input.pressed(bindings::MOVE_UP) {
-            tmp.y += 1.0;
-        }
-        if input.pressed(bindings::MOVE_DOWN) {
-            tmp.y -= 1.0;
-        }
-        if input.pressed(bindings::MOVE_RIGHT) {
-            tmp.x += 1.0;
-        }
-        if input.pressed(bindings::MOVE_LEFT) {
-            tmp.x -= 1.0;
-        }
+            if input.pressed(bindings::MOVE_UP) {
+                tmp.y += 1.0;
+            }
+            if input.pressed(bindings::MOVE_DOWN) {
+                tmp.y -= 1.0;
+            }
+            if input.pressed(bindings::MOVE_RIGHT) {
+                tmp.x += 1.0;
+            }
+            if input.pressed(bindings::MOVE_LEFT) {
+                tmp.x -= 1.0;
+            }
 
-        movement.0 = tmp.normalize_or_zero();
+            movement.0 = tmp.normalize_or_zero() * camera_movement_speed.0 * time.delta_secs();
+        }
     }
 }
 
